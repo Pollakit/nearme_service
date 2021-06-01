@@ -73,7 +73,7 @@ class Market(models.Model):
     desc = models.TextField(blank=False, null=True)
     location = PlainLocationField()
     deliveryLocations = models.ManyToManyField(
-        DeliveryLocation, verbose_name="AvailableDeliveryLocaions", blank=True, null=True)
+        DeliveryLocation, verbose_name="AvailableDeliveryLocaions", blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     is_active = models.BooleanField()

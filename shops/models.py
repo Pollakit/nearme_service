@@ -31,7 +31,7 @@ class Shop(models.Model):
         verbose_name="ShopImage", upload_to='images/shops/', blank=False, null=True)
     desc = models.TextField(blank=False, null=True)
     categories = models.ManyToManyField(
-        ShopCategory, related_name="ShopCategories", blank=False, null=True)
+        ShopCategory, related_name="ShopCategories", blank=False)
     promptpayIdentifier = models.CharField(
         max_length=13, blank=False, null=True)
 
@@ -109,7 +109,7 @@ class Product(models.Model):
     price = models.FloatField(
         verbose_name="ProductPrice", blank=False, null=True, default=0.0)
     decorators = models.ManyToManyField(
-        Decorator, verbose_name="Decorators", blank=False, null=True)
+        Decorator, verbose_name="Decorators", blank=False)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
