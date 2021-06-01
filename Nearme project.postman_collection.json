@@ -1,0 +1,2932 @@
+{
+	"info": {
+		"_postman_id": "2903775f-dfc7-4167-8cf9-d58ca3ecb11e",
+		"name": "Nearme project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authen",
+			"item": [
+				{
+					"name": "Log in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "cus02",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "cus02@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/dj-rest-auth/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"dj-rest-auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/dj-rest-auth/logout/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"dj-rest-auth",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/dj-rest-auth/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"dj-rest-auth",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "For Customer",
+					"item": [
+						{
+							"name": "Create Customer 1",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n            \"username\": \"cus01\",\r\n            \"email\": \"cus01@example.com\",\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\",\r\n            \"password\": \"123456789\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Customer 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n            \"username\": \"cus02\",\r\n            \"email\": \"cus02@example.com\",\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"Two\",\r\n            \"password\": \"123456789\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer id 1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all customer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit customer",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n            \"first_name\":\"cus\",\r\n            \"last_name\": \"one\"\r\n        }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "For ShopOwner",
+					"item": [
+						{
+							"name": "create Shopowner",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"shop01\",\r\n        \"email\": \"shop01@example.com\",\r\n        \"first_name\": \"shop\",\r\n        \"last_name\": \"one\",\r\n        \"password\": \"123456789\",\r\n        \"phone\": \"0888888888\"\r\n    },\r\n    \"homeAddress\": \"asdadsadad\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/shopowners/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"shopowners",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update shop owner",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Desktops/stuff picture/Project/kekw.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/shopowners/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"shopowners",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Shop Owner Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/shopowners/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"shopowners",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create Shopowner 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"shop02\",\r\n        \"email\": \"shop02@example.com\",\r\n        \"first_name\": \"shop\",\r\n        \"last_name\": \"two\",\r\n        \"password\": \"123456789\",\r\n        \"phone\": \"0888888888\"\r\n    },\r\n    \"homeAddress\": \"asdadsadad\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/accounts/shopowners/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"shopowners",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "For MarketAdmin",
+					"item": [
+						{
+							"name": "Get MarketAdmin id 1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/marketadmins/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"marketadmins",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Markets",
+			"item": [
+				{
+					"name": "For customer",
+					"item": [
+						{
+							"name": "Create favourite location",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "customer",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "is_main",
+											"value": "True",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/markets/favoriteLocation/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"favoriteLocation",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update favorite location",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "is_main",
+											"value": "false",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/markets/favoriteLocation/3/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"favoriteLocation",
+										"3",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All favourite location of Customer 01",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/favoriteLocation/customer/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"favoriteLocation",
+										"customer",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MarketChain List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/marketchains/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"marketchains",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MarketChain Detail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/marketchains/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"marketchains",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search for marketChain by name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/marketchains/search/?search=kmi",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"marketchains",
+										"search",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "kmi"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Market(Canteen) in MarketChain",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/markets/marketchain/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"markets",
+										"marketchain",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Market deliver to selected location",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/markets/deliveryLocation/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"markets",
+										"deliveryLocation",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search for market",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/markets/markets/search/?search=pra",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"markets",
+										"search",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "pra"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "For MarketAdmin",
+					"item": [
+						{
+							"name": "DeliveryLocation",
+							"item": [
+								{
+									"name": "Create Deliverylocation(ECC)",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "ECC",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.729339465868382,100.77548503875732",
+													"type": "text"
+												},
+												{
+													"key": "created_for",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ecc.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Deliverylocation(IC)",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "ic building",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.729985230056876,100.77542066574097",
+													"type": "text"
+												},
+												{
+													"key": "created_for",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ic building.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create DeliveryLocation(HM)",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "HM",
+													"type": "text"
+												},
+												{
+													"key": "created_for",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.726545859038305,100.7753562927246",
+													"type": "text"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/HM.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "All deliverylocation for KMTIL",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/marketchain/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												"marketchain",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Deliverylocation(Sci)",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "คณะวิทยาศาสตร์",
+													"type": "text"
+												},
+												{
+													"key": "created_for",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.72906765248209,100.77932596206665",
+													"type": "text"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/Science canteen.jpg"
+												},
+												{
+													"key": "X-CSRFToken",
+													"value": "{{csrftoken}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete DeliveryLocation(Sci)",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/markets/deliverylocations/4/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"deliverylocations",
+												"4",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Market",
+							"item": [
+								{
+									"name": "Create market(A canteen)",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "marketChain",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "A canteen",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/A canteen.jpg"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/A canteen02.jpg"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/A canteen03.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "โรงA โรงอาหารวิศวกรรมศาสตร์",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.726760352215514,100.775426030159",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit market A canteen",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "location",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create market(L canteen)",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "marketChain",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "L canteen",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/L canteen.jpg",
+													"disabled": true
+												},
+												{
+													"key": "desc",
+													"value": "L canteen โรงอาหารภาคไฟฟ้า",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "location",
+													"value": "13.728761445114007,100.77523827552795",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get L canteen detail",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/markets/markets/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit canteen delivery Location",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/A canteen02.jpg"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/A canteen03.jpg"
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create market(Prateph canteen)",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "marketChain",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "Prateph",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/Prateph canteen.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "โรงอาหารพระเทพ",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "location",
+													"value": "13.730009409616114,100.77593564987183",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "2",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "is_active",
+													"value": "True",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create market(Sci canteen)",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "marketChain",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Sci canteen",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/Science canteen.jpg"
+												},
+												{
+													"key": "location",
+													"value": "13.72906765248209,100.77932596206665",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "โรงอาหารคณะวิทยาศาสตร์",
+													"type": "text"
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "4",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Market(Science Canteen)",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/markets/markets/6/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												"6",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "All market in KMITL",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/markets/markets/marketchain/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												"marketchain",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create market",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "marketChain",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Ass",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/kekw.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "Ass market",
+													"type": "text"
+												},
+												{
+													"key": "location",
+													"value": "13.730009409616114,100.77593564987183",
+													"type": "text"
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "deliveryLocations",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "True",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "All market",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/markets/markets/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"markets",
+												"markets",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Open/ Close MarketChain(University)",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "is_active",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/markets/openclosemarketchain/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"openclosemarketchain",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Open/ Close Market",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "is_active",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/markets/openclosemarket/4/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"markets",
+										"openclosemarket",
+										"4",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Shops",
+			"item": [
+				{
+					"name": "For ShopOwner",
+					"item": [
+						{
+							"name": "Shop Profile",
+							"item": [
+								{
+									"name": "Create Shop",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shopOwner",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "market",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "ส้มตำพระเทพ",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้มตำพระเทพ.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "ส้ำตำ ไก่ย่าง ไก่ทอด ลาบ น้ำตก",
+													"type": "text"
+												},
+												{
+													"key": "promptpayIdentifier",
+													"value": "0883218844",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "4",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shops/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Shop 2",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shopOwner",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "market",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Steak Techno",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้มตำพระเทพ.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "Steak ไก่เทอริยากิ",
+													"type": "text"
+												},
+												{
+													"key": "promptpayIdentifier",
+													"value": "0883218844",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shops/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create shop Category",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "ก๋วยเตี๋ยว",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shopcategories/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shopcategories",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "All shop categories",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/shopcategories/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shopcategories",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Search Shop Categories",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shopcategories/search/?search=ข",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shopcategories",
+												"search",
+												""
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "ข"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit shop profile",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shop",
+													"value": "ส้มตำพระเทพ",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้มตำพระเทพ.jpg",
+													"disabled": true
+												},
+												{
+													"key": "desc",
+													"value": "ส้ำตำ ไก่ย่าง ไก่ทอด ลาบ น้ำตก",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "promptpayIdentifier",
+													"value": "0883218844",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "is_active",
+													"value": "True",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "shopOwner",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "market",
+													"value": "6",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ไก่ย่าง.jpg"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้ำตำ.jpg"
+												},
+												{
+													"key": "categories",
+													"value": "3",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "categories",
+													"value": "",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shops/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Menu",
+							"item": [
+								{
+									"name": "Create Menu Category",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shop",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "ลาบ",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit Menu Category",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shop",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "desc",
+													"value": "ก็ส้มตำอ่ะ",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All Menu Category",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/shop/1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												"shop",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Menu Category Shop 2",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shop",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "Steak",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "ตามชื่อเลย",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Enable/ Disable Menu Category",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": null
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "Create Product",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "category",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "ตำไทยไข่เค็ม",
+													"type": "text"
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ตำไทย.jpg"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้ำตำ.jpg"
+												},
+												{
+													"key": "desc",
+													"value": "ตำไทย ไม่ใส่ปลาร้า เพิ่มไข่เค็ม",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "45",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/products/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"products",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All product in ส้มตำ category",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/products/menucategory/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"products",
+												"menucategory",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit Product",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "category",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "ตำไทยไทย",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "main_image",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้ำตำ.jpg",
+													"disabled": true
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/kmitl01.png",
+													"disabled": true
+												},
+												{
+													"key": "desc",
+													"value": "ตำไทย ไม่ใส่ปลาร้า เพิ่มไข่เค็ม",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "price",
+													"value": "45",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "decorators",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "decorators",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/products/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"products",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Decorator",
+							"item": [
+								{
+									"name": "Create decorator for shop ส้มตำพระเทพ",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "shop",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "name",
+													"value": "เพิ่มหวาน",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "เบาหวานยังไม่มาจัดได้เต็มที่",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "0.00",
+													"type": "text"
+												},
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/decorators/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"decorators",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit decorator",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "is_active",
+													"value": "true",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/decorators/2/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"decorators",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "For customer",
+					"item": [
+						{
+							"name": "Shop",
+							"item": [
+								{
+									"name": "Get all shop in the market",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/shops/market/3/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												"market",
+												"3",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get shop details",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/shops/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add favourite shop",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "customer",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "shop",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/favouriteShop/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"favouriteShop",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Customer Favourite Shop",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/favouriteShop/customer/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"favouriteShop",
+												"customer",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Favourite shop",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/shops/favouriteShop/2/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"favouriteShop",
+												"2",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Menu",
+							"item": [
+								{
+									"name": "Get all available menu in the shop",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/customer/shop/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												"customer",
+												"shop",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Menu detail",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "Search Product in L canteen ( market 3)",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/products/market/3/search/?search=ไข่",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"products",
+												"market",
+												"3",
+												"search",
+												""
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "ไข่"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get product list of selected(ส้มตำ) category",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/products/customer/menucategory/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"products",
+												"customer",
+												"menucategory",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Decorator",
+							"item": [
+								{
+									"name": "Get Decorators by product",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/decorators/product/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"decorators",
+												"product",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "For customer",
+					"item": [
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "shop",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "customer",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "totalPrice",
+											"value": "40",
+											"type": "text"
+										},
+										{
+											"key": "deliveryLocation",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "deliveryNote",
+											"value": "floor 8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/orders/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"orders",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create OrderedProduct For order 3",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order\":3,\r\n    \"product\":1,\r\n    \"price\":40,\r\n    \"decorators\": [\r\n            {\r\n                \"decorator\": 1,\r\n                \"price\": 0.0\r\n            },\r\n            {\r\n                \"decorator\": 2,\r\n                \"price\": 0.0\r\n            }\r\n        ]\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/products/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/orders/orders/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"orders",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel order",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "state",
+											"value": "CANCEL",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/state/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"state",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ordered history",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/orders/orders/customer/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"orders",
+										"customer",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "For ShopOwner",
+					"item": [
+						{
+							"name": "Change orderStatus",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "state",
+											"value": "RECIEVED",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/state/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"state",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRFToken",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "shop",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "customer",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "totalPrice",
+											"value": "40",
+											"type": "text"
+										},
+										{
+											"key": "deliveryLocation",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "deliveryNote",
+											"value": "floor 8",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/orders/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"orders",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Sale history",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/orders/orders/shop/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"orders",
+										"shop",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "https://smooth-wolverine-5.loca.lt"
+		},
+		{
+			"key": "csrftoken",
+			"value": "wLsFHfK6pNB90VvBfRbpmL1euhpJ5PjVYUqHtLpzS5OLC21mQdmJabEpKvicKlIi"
+		}
+	]
+}
