@@ -18,18 +18,18 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "cus02",
+									"value": "shop03",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "shop03@example.com",
 									"type": "text",
 									"disabled": true
 								},
 								{
-									"key": "email",
-									"value": "cus02@example.com",
-									"type": "text"
-								},
-								{
 									"key": "password",
-									"value": "123456789",
+									"value": "pp123456789",
 									"type": "text"
 								}
 							]
@@ -94,6 +94,56 @@
 							"path": [
 								"api",
 								"dj-rest-auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "cus03",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cus03@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password1",
+									"value": "pp123456789",
+									"type": "text"
+								},
+								{
+									"key": "password2",
+									"value": "pp123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}api/dj-rest-auth/registration/",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"dj-rest-auth",
+								"registration",
 								""
 							]
 						}
@@ -2917,16 +2967,17 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://127.0.0.1:8000",
-			"disabled": true
+			"value": "http://127.0.0.1:8000"
 		},
 		{
 			"key": "url",
-			"value": "https://smooth-wolverine-5.loca.lt"
+			"value": "https://smooth-wolverine-5.loca.lt",
+			"disabled": true
 		},
 		{
 			"key": "csrftoken",
-			"value": "wLsFHfK6pNB90VvBfRbpmL1euhpJ5PjVYUqHtLpzS5OLC21mQdmJabEpKvicKlIi"
+			"value": "wLsFHfK6pNB90VvBfRbpmL1euhpJ5PjVYUqHtLpzS5OLC21mQdmJabEpKvicKlIi",
+			"disabled": true
 		}
 	]
 }

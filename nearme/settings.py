@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'cloudinary_storage',  # Cloudinary ( For images )
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
 
 
     # 3rd party
@@ -58,7 +60,13 @@ INSTALLED_APPS = [
     'crc16',  # for promptpay
 
     'rest_framework.authtoken',  # For Authen
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'dj_rest_auth',
+    'dj_rest_auth.registration',
 
     # Heroku
     'whitenoise.runserver_nostatic',
@@ -71,6 +79,9 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'shops.apps.ShopsConfig',
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
