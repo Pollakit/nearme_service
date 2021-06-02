@@ -76,6 +76,8 @@ class CustomerSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         if('type' in user_data.keys()):
             user_data.pop('type')
+
+        user_data['type'] = "CUSTOMER"
         user = instance.user
         instance.save()
 
@@ -114,6 +116,8 @@ class ShopOwnerSerializer(serializers.ModelSerializer):
 
             if('type' in user_data.keys()):
                 user_data.pop('type')
+
+            user_data['type'] = "SHOPOWNER"
 
             for attr, value in user_data.items():
                 if attr == 'password':
