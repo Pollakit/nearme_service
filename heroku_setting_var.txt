@@ -1,0 +1,3 @@
+DEBUG=True
+DISABLE_COLLECTSTATIC=1
+SECRET_KEY=django-insecure-xav%ud-&p78(t6ibq*ryl=kg2_@gmwuv4l61u-s1d%qd$!5%eu
