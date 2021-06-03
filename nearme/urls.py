@@ -18,21 +18,26 @@ from rest_framework.documentation import include_docs_urls
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls import url
 from dj_rest_auth.views import PasswordResetConfirmView
 from allauth.account.views import confirm_email
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('accounts/', include('allauth.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
     path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api/dj-rest-auth/registration/',
          include('dj_rest_auth.registration.urls')),
     path(
-        '^api/dj-rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', confirm_email),
-    path('^api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        'api/dj-rest-auth/registration/account-confirm-email/<str:key>/', confirm_email),
+    path('api/dj-rest-auth/password/reset/confirm/<slug:uidb64>/<slug:token>/',
          PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # path(
+    #     '^api/dj-rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', confirm_email),
+    # path('api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
+    #         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
 
 
