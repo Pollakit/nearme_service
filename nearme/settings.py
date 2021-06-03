@@ -23,12 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-xav%ud-&p78(t6ibq*ryl=kg2_@gmwuv4l61u-s1d%qd$!5%eu'
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# DEBUG = False
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 
@@ -61,7 +58,6 @@ INSTALLED_APPS = [
 
     'rest_framework.authtoken',  # For Authen
 
-    'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
@@ -87,10 +83,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = 'nearme.kmitl@gmail.com'
-EMAIL_HOST_PASSWORD = 'mxmbthfqwmynzwab'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = 'Nearme service Team <noreply@nearme.com>'
 
@@ -117,7 +111,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
 
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # Heroku
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Heroku
 
 
     'corsheaders.middleware.CorsMiddleware',  # cors
@@ -172,21 +166,21 @@ WSGI_APPLICATION = 'nearme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nearme',
-        'USER': 'pollakit',
-        'PASSWORD': '123456789',
-        'HOST': '127.0.0.1',
-        'PORT': 5432,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'nearme',
+#         'USER': 'pollakit',
+#         'PASSWORD': '123456789',
+#         'HOST': '127.0.0.1',
+#         'PORT': 5432,
+#     }
+# }
 
 # Heroku Dabase Config
-# DATABASES = {
-#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-# }
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+}
 
 
 # Password validation
@@ -252,13 +246,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'nearme/static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'nearme-kmitl',
-#     'API_KEY': '264357333432383',
-#     'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
-# }
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'nearme-kmitl',
+    'API_KEY': '264357333432383',
+    'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# https: // docs.djangoproject.com/en/3.2/ref/settings/  # default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
