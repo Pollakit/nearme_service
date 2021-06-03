@@ -20,7 +20,7 @@ urlpatterns = [
     # path('users/', UserList.as_view()),
     # path('users/<int:pk>/', UserDetail.as_view()),
 
-    path('customers/', CustomerList.as_view(), name="getAllCustomer"),
+    path('customers/', CustomerList.as_view()),
     path('customers/<int:pk>/', CustomerDetail.as_view()),
 
     path('shopowners/', ShopOwnerList.as_view()),

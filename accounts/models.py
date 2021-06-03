@@ -19,6 +19,10 @@ class CustomUser(AbstractUser):
         validators=[phone_regex], max_length=10, blank=False, null=False)
     type = models.CharField(max_length=11,
                             choices=Types.choices)
+    # objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
 
 
 class Customer(models.Model):

@@ -19,6 +19,46 @@ from .models import CustomUser, Customer, ShopOwner, MarketAdmin
 from markets.serializers import RoughFavoriteLocationSerializer
 from shops.models import CustomerFavoriteShop
 import json
+from dj_rest_auth.serializers import UserDetailsSerializer, TokenSerializer
+from dj_rest_auth.registration.serializers import RegisterSerializer
+
+from allauth.account.adapter import get_adapter
+from allauth.account.utils import setup_user_email
+
+from django.core.validators import RegexValidator
+
+
+class CustomRegisterSerializer(RegisterSerializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    phone_regex = RegexValidator(regex=r'^\d{9,10}$')
+    phone = serializers.CharField(
+        validators=[phone_regex], max_length=10, required=True)
+    type = serializers.ChoiceField(
+        choices=['CUSTOMER', 'SHOPOWNER'], required=True)
+
+    def get_cleaned_data(self):
+        data_dict = super().get_cleaned_data()
+        data_dict['first_name'] = self.validated_data.get('first_name', '')
+        data_dict['last_name'] = self.validated_data.get('last_name', '')
+        data_dict['phone'] = self.validated_data.get('phone', '')
+        data_dict['type'] = self.validated_data.get('type', '')
+
+        return data_dict
+
+
+class CustomUserDetailsSerializer(UserDetailsSerializer):
+
+    class Meta(UserDetailsSerializer.Meta):
+        fields = UserDetailsSerializer.Meta.fields + \
+            ('first_name', 'last_name', 'phone', 'type',)
+
+
+class CustomTokenSerializer(TokenSerializer):
+    user = CustomUserDetailsSerializer(read_only=True)
+
+    class Meta(TokenSerializer.Meta):
+        fields = ('key', 'user')
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -37,10 +77,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
-    user = CustomUserSerializer(many=False)
-    # delverylocations = DeliveryLocationSerializer(many=True, read_only=True)
     delverylocation = serializers.SerializerMethodField(
         "getMainDelveryLocation")
+
+    # user = CustomUserDetailsSerializer()
 
     class Meta:
         model = Customer
@@ -49,33 +89,23 @@ class CustomerSerializer(serializers.ModelSerializer):
     def getMainDelveryLocation(self, obj):
         return RoughFavoriteLocationSerializer(obj.customerfavoritelocation_set.filter(is_main=True), many=True).data
 
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = CustomUser.objects.create(type="CUSTOMER", **user_data)
-        user.set_password(user_data['password'])
-        user.save()
-        customer = Customer.objects.create(user=user, **validated_data)
+    # def create(self, validated_data):
+    #     user_data = validated_data.pop('user')
+    #     user = CustomUser.objects.create(type="CUSTOMER", **user_data)
+    #     user.set_password(user_data['password'])
+    #     user.save()
+    #     customer = Customer.objects.create(user=user, **validated_data)
 
-        return customer
+    #     return customer
 
     def update(self, instance, validated_data):
-        # user_data = validated_data.pop('user')
-        # user = instance.user
-        # instance.save()
-
-        # user.username = user_data.get('username', user.username)
-        # user.email = user_data.get('email', user.email)
-        # user.first_name = user_data.get('first_name', user.first_name)
-        # user.last_name = user_data.get('last_name', user.last_name)
-        # user.phone = user_data.get('phone', user.phone)
-        # user.type = user_data.get('type', user.type)
-        # user.save()
-
-        # return instance
 
         user_data = validated_data.pop('user')
         if('type' in user_data.keys()):
             user_data.pop('type')
+
+        if('password' in user_data.keys()):
+            user_data.pop('password')
 
         user_data['type'] = "CUSTOMER"
         user = instance.user
@@ -92,20 +122,20 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class ShopOwnerSerializer(serializers.ModelSerializer):
-    user = CustomUserSerializer(many=False)
+    # user = CustomUserSerializer(many=False)
 
     class Meta:
         model = ShopOwner
         fields = ['id', 'user', 'homeAddress', 'image', ]
 
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = CustomUser.objects.create(type="SHOPOWNER", **user_data)
-        user.set_password(user_data['password'])
-        user.save()
-        shopowner = ShopOwner.objects.create(user=user, **validated_data)
+    # def create(self, validated_data):
+    #     user_data = validated_data.pop('user')
+    #     user = CustomUser.objects.create(type="SHOPOWNER", **user_data)
+    #     user.set_password(user_data['password'])
+    #     user.save()
+    #     shopowner = ShopOwner.objects.create(user=user, **validated_data)
 
-        return shopowner
+    #     return shopowner
 
     def update(self, instance, validated_data):
 
@@ -116,6 +146,9 @@ class ShopOwnerSerializer(serializers.ModelSerializer):
 
             if('type' in user_data.keys()):
                 user_data.pop('type')
+
+            if('password' in user_data.keys()):
+                user_data.pop('password')
 
             user_data['type'] = "SHOPOWNER"
 

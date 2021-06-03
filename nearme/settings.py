@@ -80,7 +80,21 @@ INSTALLED_APPS = [
     'shops.apps.ShopsConfig',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Email identification
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'nearme.kmitl@gmail.com'
+EMAIL_HOST_PASSWORD = 'mxmbthfqwmynzwab'
+
+DEFAULT_FROM_EMAIL = 'Nearme service Team <noreply@nearme.com>'
+
+
 SITE_ID = 1
 
 REST_FRAMEWORK = {
@@ -103,7 +117,9 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
 
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Heroku
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # Heroku
+
+
     'corsheaders.middleware.CorsMiddleware',  # cors
     'django.middleware.common.CommonMiddleware',  # cors
 
@@ -156,27 +172,45 @@ WSGI_APPLICATION = 'nearme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'nearme',
-#         'USER': 'pollakit',
-#         'PASSWORD': '123456789',
-#         'HOST': '127.0.0.1',
-#         'PORT': 5432,
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nearme',
+        'USER': 'pollakit',
+        'PASSWORD': '123456789',
+        'HOST': '127.0.0.1',
+        'PORT': 5432,
+    }
+}
 
 # Heroku Dabase Config
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-}
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+# }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
+ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer'
+}
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -218,12 +252,12 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'nearme/static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'nearme-kmitl',
-    'API_KEY': '264357333432383',
-    'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'nearme-kmitl',
+#     'API_KEY': '264357333432383',
+#     'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
+# }
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
