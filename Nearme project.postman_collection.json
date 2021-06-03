@@ -12,20 +12,26 @@
 					"name": "Log in",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
 								{
 									"key": "username",
-									"value": "shop03",
+									"value": "billPollakit",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "shop03@example.com",
-									"type": "text",
-									"disabled": true
+									"value": "pollakit254201@gmail.com",
+									"type": "text"
 								},
 								{
 									"key": "password",
@@ -86,14 +92,26 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "pollakit254201@gmail.com",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{url}}/api/dj-rest-auth/",
+							"raw": "{{url}}/api/dj-rest-auth/password/reset/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"dj-rest-auth",
+								"password",
+								"reset",
 								""
 							]
 						}
@@ -101,7 +119,7 @@
 					"response": []
 				},
 				{
-					"name": "Create user account",
+					"name": "Create user(Shop) account",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -116,12 +134,12 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "cus03",
+									"value": "billPollakit",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "cus03@example.com",
+									"value": "pollakit254201@gmail.com",
 									"type": "text"
 								},
 								{
@@ -133,15 +151,107 @@
 									"key": "password2",
 									"value": "pp123456789",
 									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "bill",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Pollakit",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0888888888",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "CUSTOMER",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}api/dj-rest-auth/registration/",
+							"raw": "{{url}}/api/dj-rest-auth/registration/",
 							"host": [
-								"{{url}}api"
+								"{{url}}"
 							],
 							"path": [
+								"api",
+								"dj-rest-auth",
+								"registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user(Customer) account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRFToken",
+								"value": "{{csrftoken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "cus04",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cus04@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password1",
+									"value": "pp123456789",
+									"type": "text"
+								},
+								{
+									"key": "password2",
+									"value": "pp123456789",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "cus",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "four",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "0888888888",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "CUSTOMER",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/dj-rest-auth/registration/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
 								"dj-rest-auth",
 								"registration",
 								""
@@ -159,7 +269,7 @@
 					"name": "For Customer",
 					"item": [
 						{
-							"name": "Create Customer 1",
+							"name": "Create Customer",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -171,42 +281,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n            \"username\": \"cus01\",\r\n            \"email\": \"cus01@example.com\",\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\",\r\n            \"password\": \"123456789\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/api/accounts/customers/",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"api",
-										"accounts",
-										"customers",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Customer 2",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "X-CSRFToken",
-										"value": "{{csrftoken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n            \"username\": \"cus02\",\r\n            \"email\": \"cus02@example.com\",\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"Two\",\r\n            \"password\": \"123456789\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
+									"raw": "{\r\n    \"user\": 10\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -234,7 +309,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/1/",
+									"raw": "{{url}}/api/accounts/customers/18/",
 									"host": [
 										"{{url}}"
 									],
@@ -242,7 +317,7 @@
 										"api",
 										"accounts",
 										"customers",
-										"1",
+										"18",
 										""
 									]
 								}
@@ -297,7 +372,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n            \"first_name\":\"cus\",\r\n            \"last_name\": \"one\"\r\n        }\r\n}",
+									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -337,8 +412,24 @@
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n        \"username\": \"shop01\",\r\n        \"email\": \"shop01@example.com\",\r\n        \"first_name\": \"shop\",\r\n        \"last_name\": \"one\",\r\n        \"password\": \"123456789\",\r\n        \"phone\": \"0888888888\"\r\n    },\r\n    \"homeAddress\": \"asdadsadad\"\r\n}",
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user",
+											"value": "8",
+											"type": "text"
+										},
+										{
+											"key": "homeAddress",
+											"value": "My home address",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/D:/Desktops/stuff picture/se directory/jia2.png"
+										}
+									],
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2967,17 +3058,16 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://127.0.0.1:8000"
+			"value": "https://nearme-kmitl.herokuapp.com"
 		},
 		{
 			"key": "url",
-			"value": "https://smooth-wolverine-5.loca.lt",
+			"value": "http://127.0.0.1:8000",
 			"disabled": true
 		},
 		{
 			"key": "csrftoken",
-			"value": "wLsFHfK6pNB90VvBfRbpmL1euhpJ5PjVYUqHtLpzS5OLC21mQdmJabEpKvicKlIi",
-			"disabled": true
+			"value": "X1kOkTIV9HW5cyTwDD29zqHcysTbQ7IhB26LIKXfcqTB2B4Fy0ogO7h9dxQZDaKh"
 		}
 	]
 }
