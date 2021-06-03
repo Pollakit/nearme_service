@@ -26,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+# DEBUG = False
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
 
     'rest_framework.authtoken',  # For Authen
 
+    'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
@@ -178,6 +181,7 @@ WSGI_APPLICATION = 'nearme.wsgi.application'
 # }
 
 # Heroku Dabase Config
+
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
@@ -189,9 +193,9 @@ DATABASES = {
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
@@ -252,7 +256,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 # Default primary key field type
-# https: // docs.djangoproject.com/en/3.2/ref/settings/  # default-auto-field
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

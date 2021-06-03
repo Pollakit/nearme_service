@@ -29,8 +29,12 @@ urlpatterns = [
     path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api/dj-rest-auth/registration/',
          include('dj_rest_auth.registration.urls')),
-    url('^api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path(
+        '^api/dj-rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', confirm_email),
+    path('^api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+
+
 
     path('docs/', include_docs_urls(title='My API title')),
 
