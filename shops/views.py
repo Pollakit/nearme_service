@@ -1,5 +1,5 @@
 # shops/views.py
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from django.shortcuts import render
 
 # Get all shop in a market + search
@@ -30,19 +30,16 @@ from .serializers import (ShopCategorySerializer,
 
 # Shop
 class ShopList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
 
 
 class ShopDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
 
 
 class ShopListByMarket(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RoughShopSerializer
 
     def get_queryset(self):
@@ -51,7 +48,6 @@ class ShopListByMarket(generics.ListAPIView):
 
 
 class ShopSearch(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Shop.objects.all()
     serializer_class = RoughShopSerializer
 
@@ -64,13 +60,11 @@ class ShopSearch(generics.ListAPIView):
 
 # ShopCategory
 class ShopCategoryList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = ShopCategory.objects.all()
     serializer_class = ShopCategorySerializer
 
 
 class ShopCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = ShopCategory.objects.all()
     serializer_class = ShopCategorySerializer
 
@@ -101,7 +95,6 @@ class MenuCategoryListByShop(generics.ListAPIView):
 
 
 class CustomerViewMenuCategoryListByShop(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RoughMenuCategorySerializer
 
     def get_queryset(self):
@@ -110,7 +103,6 @@ class CustomerViewMenuCategoryListByShop(generics.ListAPIView):
 
 
 class MenuCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = MenuCategory.objects.all()
     serializer_class = MenuCategorySerializer
 
@@ -130,7 +122,6 @@ class ProductListByMenuCategory(generics.ListAPIView):
 
 
 class CustomerViewProductListByMenuCategory(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RoughProductSerializer
 
     def get_queryset(self):
@@ -140,7 +131,6 @@ class CustomerViewProductListByMenuCategory(generics.ListAPIView):
 
 class ProductSearch(generics.ListAPIView):
     # queryset = Product.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RoughProductSerializer
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -167,7 +157,6 @@ class ProductSearch(generics.ListAPIView):
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -187,7 +176,6 @@ class DecoratorListByShop(generics.ListCreateAPIView):
 
 
 class DecoratorListByProduct(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = DecoratorSerializer
 
     def get_queryset(self):
@@ -196,7 +184,6 @@ class DecoratorListByProduct(generics.ListCreateAPIView):
 
 
 class DecoratorDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Decorator.objects.all()
     serializer_class = DecoratorSerializer
 
