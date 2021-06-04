@@ -13,7 +13,10 @@
 # GET PUT   -   MarketAdmin<id>
 
 from django.urls import path
-from .views import UserList, UserDetail, CustomerList, CustomerDetail, ShopOwnerList, ShopOwnerDetail, MarketAdminList, MarketAdminDetail
+from .views import (UserList, UserDetail,
+                    CustomerList, CustomerDetail, UserViewCustomerDetail,
+                    ShopOwnerList, ShopOwnerDetail, UserViewShopOwnerDetail,
+                    MarketAdminList, MarketAdminDetail, UserViewMarketAdminDetail)
 
 
 urlpatterns = [
@@ -22,10 +25,13 @@ urlpatterns = [
 
     path('customers/', CustomerList.as_view()),
     path('customers/<int:pk>/', CustomerDetail.as_view()),
+    path('customers/user/<int:pk>/', UserViewCustomerDetail.as_view()),
 
     path('shopowners/', ShopOwnerList.as_view()),
     path('shopowners/<int:pk>/', ShopOwnerDetail.as_view()),
+    path('shopowners/user/<int:pk>/', UserViewShopOwnerDetail.as_view()),
 
     path('marketadmins/', MarketAdminList.as_view()),
     path('marketadmins/<int:pk>/', MarketAdminDetail.as_view()),
+    path('shopowners/user/<int:pk>/', UserViewMarketAdminDetail.as_view()),
 ]
