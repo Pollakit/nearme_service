@@ -1,6 +1,6 @@
 # markets/view.py
 
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.shortcuts import render
 from rest_framework import generics, status
 
@@ -23,16 +23,19 @@ from .serializers import (RoughMarketChainSerializer, DetailMarketChainSerialize
 
 # MarketChain
 class MarketChainList(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = MarketChain.objects.filter(is_active=True)
     serializer_class = RoughMarketChainSerializer
 
 
 class MarketChainDetail(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = MarketChain.objects.all()
     serializer_class = DetailMarketChainSerializer
 
 
 class MarketChainSearch(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = MarketChain.objects.all()
     serializer_class = RoughMarketChainSerializer
 
@@ -46,11 +49,13 @@ class MarketChainSearch(generics.ListAPIView):
 # Market
 # Get all market in marketChain + search
 class MarketList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Market.objects.all()
     serializer_class = DetailMarketSerializer
 
 
 class MarketListByMarketChain(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RoughMarketSerializer
 
     def get_queryset(self):
@@ -59,6 +64,7 @@ class MarketListByMarketChain(generics.ListAPIView):
 
 
 class MarketSearch(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Market.objects.all()
     serializer_class = RoughMarketSerializer
 
@@ -108,12 +114,14 @@ class DeliveryLocationListByMarketChain(generics.ListAPIView):
 ##### For MarketChain Admin #####
 # Update Delete Market
 class MarketDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Market.objects.all()
     serializer_class = DetailMarketSerializer
 
 
 # Create/ Update DeliveryLocation
 class DeliveryLocationList(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = DeliveryLocation.objects.all()
     serializer_class = DeliveryLocationSerializer
 
