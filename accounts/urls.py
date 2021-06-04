@@ -34,4 +34,5 @@ urlpatterns = [
     path('marketadmins/', MarketAdminList.as_view()),
     path('marketadmins/<int:pk>/', MarketAdminDetail.as_view()),
     path('marketadmins/user/<int:pk>/', UserViewMarketAdminDetail.as_view()),
+
 ]

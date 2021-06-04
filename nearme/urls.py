@@ -23,6 +23,7 @@ from django.conf.urls import url
 from dj_rest_auth.views import PasswordResetConfirmView
 from allauth.account.views import confirm_email
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -39,12 +40,11 @@ urlpatterns = [
     # path('api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
     #         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
-
-
     path('docs/', include_docs_urls(title='My API title')),
 
     path('api/accounts/', include('accounts.urls')),
     path('api/markets/', include('markets.urls')),
     path('api/orders/', include('orders.urls')),
     path('api/shops/', include('shops.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

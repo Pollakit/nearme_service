@@ -31,11 +31,12 @@
 								{
 									"key": "email",
 									"value": "pollakit254201@gmail.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "pp123456789",
+									"value": "PP123456789",
 									"type": "text"
 								}
 							]
@@ -134,12 +135,12 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "billPollakit",
+									"value": "market01",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "pollakit254201@gmail.com",
+									"value": "market01@example.com",
 									"type": "text"
 								},
 								{
@@ -154,12 +155,12 @@
 								},
 								{
 									"key": "first_name",
-									"value": "bill",
+									"value": "mar",
 									"type": "text"
 								},
 								{
 									"key": "last_name",
-									"value": "Pollakit",
+									"value": "one",
 									"type": "text"
 								},
 								{
@@ -169,7 +170,7 @@
 								},
 								{
 									"key": "type",
-									"value": "CUSTOMER",
+									"value": "SHOPOWNER",
 									"type": "text"
 								}
 							]
@@ -276,12 +277,19 @@
 									{
 										"key": "X-CSRFToken",
 										"value": "{{csrftoken}}",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"user\": 10\r\n}",
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user",
+											"value": "12",
+											"type": "text"
+										}
+									],
 									"options": {
 										"raw": {
 											"language": "json"
@@ -318,6 +326,28 @@
 										"accounts",
 										"customers",
 										"18",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer from User ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/customers/user/3/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"customers",
+										"user",
+										"3",
 										""
 									]
 								}
@@ -509,6 +539,28 @@
 							"response": []
 						},
 						{
+							"name": "Get Shop Owner profile from User ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/marketadmins/user/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"marketadmins",
+										"user",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "create Shopowner 2",
 							"request": {
 								"method": "POST",
@@ -563,6 +615,28 @@
 										"accounts",
 										"marketadmins",
 										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Shop Owner profile from User ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/accounts/shopowners/user/3/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"shopowners",
+										"user",
+										"3",
 										""
 									]
 								}
@@ -1656,10 +1730,10 @@
 			"name": "Shops",
 			"item": [
 				{
-					"name": "For ShopOwner",
+					"name": "For market admin",
 					"item": [
 						{
-							"name": "Shop Profile",
+							"name": "Shop profile",
 							"item": [
 								{
 									"name": "Create Shop",
@@ -1677,7 +1751,7 @@
 											"formdata": [
 												{
 													"key": "shopOwner",
-													"value": "1",
+													"value": "2",
 													"type": "text"
 												},
 												{
@@ -1714,6 +1788,11 @@
 													"key": "categories",
 													"value": "4",
 													"type": "text"
+												},
+												{
+													"key": "more_images",
+													"type": "file",
+													"src": "/D:/Desktops/stuff picture/Project/ส้ำตำ.jpg"
 												}
 											]
 										},
@@ -1810,7 +1889,7 @@
 										"header": [
 											{
 												"key": "X-CSRFToken",
-												"value": "{{csrftoken}}",
+												"value": "KdfSvc9oeD5v7birOqMFSOhECZvvMPPm2O9YpLA69TFGafa99DMNgxDEm3nJ3R8Z",
 												"type": "text"
 											}
 										],
@@ -1838,61 +1917,17 @@
 										}
 									},
 									"response": []
-								},
-								{
-									"name": "All shop categories",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/api/shops/shopcategories/",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"api",
-												"shops",
-												"shopcategories",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Search Shop Categories",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": []
-										},
-										"url": {
-											"raw": "{{url}}/api/shops/shopcategories/search/?search=ข",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"api",
-												"shops",
-												"shopcategories",
-												"search",
-												""
-											],
-											"query": [
-												{
-													"key": "search",
-													"value": "ข"
-												}
-											]
-										}
-									},
-									"response": []
-								},
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "For ShopOwner",
+					"item": [
+						{
+							"name": "Shop Profile",
+							"item": [
 								{
 									"name": "Edit shop profile",
 									"request": {
@@ -1983,6 +2018,42 @@
 												"shops",
 												"shops",
 												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create shop Category",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-CSRFToken",
+												"value": "{{csrftoken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "ก๋วยเตี๋ยว",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/shops/shopcategories/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shopcategories",
 												""
 											]
 										}
@@ -2450,6 +2521,60 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "All shop categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/shops/shopcategories/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"shops",
+										"shopcategories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Shop Categories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/shops/shopcategories/search/?search=ข",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"shops",
+										"shopcategories",
+										"search",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "ข"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -3058,16 +3183,22 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://nearme-kmitl.herokuapp.com"
-		},
-		{
-			"key": "url",
-			"value": "http://127.0.0.1:8000",
+			"value": "https://nearme-kmitl.herokuapp.com",
 			"disabled": true
 		},
 		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
 			"key": "csrftoken",
-			"value": "X1kOkTIV9HW5cyTwDD29zqHcysTbQ7IhB26LIKXfcqTB2B4Fy0ogO7h9dxQZDaKh"
+			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "https://quick-vampirebat-31.loca.lt",
+			"disabled": true
 		}
 	]
 }
