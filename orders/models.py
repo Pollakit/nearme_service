@@ -24,7 +24,7 @@ class Order(models.Model):
     class States(models.TextChoices):
         CANCEL = "CANCEL"
         ORDERED = "ORDERED"
-        RECIEVED = "RECIEVED"
+        RECEIVED = "RECEIVED"
         DELIVERED = "DELIVERED"
         PAID = "PAID"
 

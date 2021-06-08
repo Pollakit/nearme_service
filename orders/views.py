@@ -44,3 +44,13 @@ class ShopSellHistory(generics.ListAPIView):
     def get_queryset(self):
         shopID = self.kwargs['pk']
         return Order.objects.filter(shop__id=shopID)
+
+# Shop
+
+
+class UncompletedOrder(generics.ListAPIView):
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        shopID = self.kwargs['pk']
+        return Order.objects.filter(shop__id=shopID, state='ORDERED') | Order.objects.filter(shop__id=shopID, state='RECEIVED') | Order.objects.filter(shop__id=shopID, state='ORDERED') | Order.objects.filter(shop__id=shopID, state='DELIVERED')

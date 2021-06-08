@@ -7,4 +7,5 @@ db.sqlite3
 venv/
 .env
 docker-compose.yaml
+heroku_setting_var.txt
 media/

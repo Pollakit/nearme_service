@@ -91,68 +91,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return order
 
-    # def create(self, validated_data):
-    #     customer = validated_data.pop('customer')
-    #     shop = validated_data.pop('shop')
-    #     state = "ORDERED"
-    #     products_data = self.data('products')
-    #     deliverName, deliverPhone = Shop.objects.filter(
-    #         shop__id=shop).values_list('deliverName', 'deliverPhone').get()
-
-    #     # Get price
-    #     totalPrice = 0
-    #     for product in products_data:
-    #         if('decorators' in product.keys()):
-    #             for decorator in product['decorators']:
-    #                 totalPrice += int(decorator['price'])
-
-    #         totalPrice += int(product['price'])
-
-    #     try:
-    #         order = Order.objects.create(
-    #             customer=customer, shop=shop, state=state,
-    #             deliverName=deliverName, deliverPhone=deliverPhone,
-    #             totalPrice=totalPrice, **validated_data)
-
-    #     except TypeError:
-    #         msg = (
-    #             'Got a `TypeError` when calling `Product.objects.create()`.'
-    #         )
-    #         raise TypeError(msg)
-
-    #     try:
-    #         for product_data in products_data:
-    #             if('decorators' in product_data.keys()):
-    #                 decorators_data = product_data.pop('decorators')
-
-    #             product, created = OrderedProduct.objects.get_or_create(
-    #                 order=order, **product_data)
-
-    #             try:
-    #                 for decorator_data in decorators_data:
-    #                     decorator, created = OrderedDecorator.objects.get_or_create(
-    #                         product=product, **decorator_data)
-
-    #             except TypeError:
-    #                 decorator = decorator.objects.get(pk=decorator.id)
-    #                 decorator.delete()
-    #                 msg = (
-    #                     'Got a `TypeError` when calling `OreredDecorator.objects.get_or_create()`.'
-    #                 )
-    #                 raise TypeError(msg)
-
-    #         return order
-
-    #     except TypeError:
-    #         product = product.objects.get(pk=product.id)
-    #         product.delete()
-    #         msg = (
-    #             'Got a `TypeError` when calling `OrderedProduct.objects.get_or_create()`.'
-    #         )
-    #         raise TypeError(msg)
-
-    #     return order
-
     def qr_code(self, obj):
         # return obj.shop.promptpayIdentifier
         merchant_identifier = obj.shop.promptpayIdentifier

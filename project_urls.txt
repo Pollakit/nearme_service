@@ -1,0 +1,70 @@
+/api/accounts/customers/	accounts.views.CustomerList
+/api/accounts/customers/<int:pk>/	accounts.views.CustomerDetail
+/api/accounts/customers/user/<int:pk>/	accounts.views.UserViewCustomerDetail
+/api/accounts/marketadmins/	accounts.views.MarketAdminList
+/api/accounts/marketadmins/<int:pk>/	accounts.views.MarketAdminDetail
+/api/accounts/marketadmins/user/<int:pk>/	accounts.views.UserViewMarketAdminDetail
+/api/accounts/shopowners/	accounts.views.ShopOwnerList
+/api/accounts/shopowners/<int:pk>/	accounts.views.ShopOwnerDetail
+/api/accounts/shopowners/user/<int:pk>/	accounts.views.UserViewShopOwnerDetail
+
+/api/dj-rest-auth/login/	dj_rest_auth.views.LoginView	rest_login
+/api/dj-rest-auth/logout/	dj_rest_auth.views.LogoutView	rest_logout
+/api/dj-rest-auth/password/change/	dj_rest_auth.views.PasswordChangeView	rest_password_change
+/api/dj-rest-auth/password/reset/	dj_rest_auth.views.PasswordResetView	rest_password_reset
+/api/dj-rest-auth/password/reset/confirm/	dj_rest_auth.views.PasswordResetConfirmView	rest_password_reset_confirm
+/api/dj-rest-auth/password/reset/confirm/<slug:uidb64>/<slug:token>/	dj_rest_auth.views.PasswordResetConfirmView	password_reset_confirm
+/api/dj-rest-auth/registration/	dj_rest_auth.registration.views.RegisterView	rest_register
+/api/dj-rest-auth/registration/account-confirm-email/<key>/	django.views.generic.base.TemplateView	account_confirm_email
+/api/dj-rest-auth/registration/account-confirm-email/<str:key>/	allauth.account.views.ConfirmEmailView
+/api/dj-rest-auth/registration/verify-email/	dj_rest_auth.registration.views.VerifyEmailView	rest_verify_email
+/api/dj-rest-auth/user/	dj_rest_auth.views.UserDetailsView	rest_user_details
+
+/api/markets/deliverylocations/	markets.views.DeliveryLocationList
+/api/markets/deliverylocations/<int:pk>/	markets.views.DeliveryLocationDetail
+/api/markets/deliverylocations/marketchain/<int:pk>/	markets.views.DeliveryLocationListByMarketChain
+/api/markets/favoriteLocation/	markets.views.FavouriteLocationList
+/api/markets/favoriteLocation/<int:pk>/	markets.views.FavouriteLocationDetail
+/api/markets/favoriteLocation/customer/<int:pk>/	markets.views.CustomerFavouriteLocationDetail
+/api/markets/marketchains/	markets.views.MarketChainList
+/api/markets/marketchains/<int:pk>/	markets.views.MarketChainDetail
+/api/markets/marketchains/search/	markets.views.MarketChainSearch
+/api/markets/markets/	markets.views.MarketList
+/api/markets/markets/<int:pk>/	markets.views.MarketDetail
+/api/markets/markets/deliveryLocation/<int:pk>/	markets.views.MarketListByDeliveryLocation
+/api/markets/markets/marketchain/<int:pk>/	markets.views.MarketListByMarketChain
+/api/markets/markets/search/	markets.views.MarketSearch
+/api/markets/openclosemarket/<int:pk>/	markets.views.OpenCloseMarket
+/api/markets/openclosemarketchain/<int:pk>/	markets.views.OpenCloseMarketChain
+
+/api/orders/orders/	orders.views.OrderList
+/api/orders/orders/<int:pk>/	orders.views.OrderDetail
+/api/orders/orders/customer/<int:pk>/	orders.views.CustomerOrderHistory
+/api/orders/orders/shop/<int:pk>/	orders.views.ShopSellHistory
+/api/orders/products/	orders.views.OrderedProductList
+/api/orders/state/<int:pk>/	orders.views.UpdateOrderStateView
+/api/shops/decorators/	shops.views.DecoratorList
+/api/shops/decorators/<int:pk>/	shops.views.DecoratorDetail
+/api/shops/decorators/product/<int:pk>/	shops.views.DecoratorListByProduct
+/api/shops/decorators/shop/<int:pk>/	shops.views.DecoratorListByShop
+/api/shops/favouriteShop/	shops.views.CustomerFavoriteShopList
+/api/shops/favouriteShop/<int:pk>/	shops.views.CustomerFavoriteShopDelete
+/api/shops/favouriteShop/customer/<int:pk>/	shops.views.CustomerFavoriteShopByCustomer
+/api/shops/menucategories/	shops.views.MenuCategoryList
+/api/shops/menucategories/<int:pk>/	shops.views.MenuCategoryDetail
+/api/shops/menucategories/customer/shop/<int:pk>/	shops.views.CustomerViewMenuCategoryListByShop
+/api/shops/menucategories/shop/<int:pk>/	shops.views.MenuCategoryListByShop
+/api/shops/products/	shops.views.ProductList
+/api/shops/products/<int:pk>/	shops.views.ProductDetail
+/api/shops/products/customer/menucategory/<int:pk>/	shops.views.CustomerViewProductListByMenuCategory
+/api/shops/products/market/<int:pk>/search/	shops.views.ProductSearch
+/api/shops/products/menucategory/<int:pk>/	shops.views.ProductListByMenuCategory
+/api/shops/shopcategories/	shops.views.ShopCategoryList
+/api/shops/shopcategories/<int:pk>/	shops.views.ShopCategoryDetail
+/api/shops/shopcategories/search/	shops.views.ShopCategorySearch
+/api/shops/shops/	shops.views.ShopList
+/api/shops/shops/<int:pk>/	shops.views.ShopDetail
+/api/shops/shops/market/<int:pk>/	shops.views.ShopListByMarket
+/docs/	rest_framework.schemas.views.SchemaView	api-docs:docs-index
+/docs/schema.js	rest_framework.schemas.views.SchemaView	api-docs:schema-js
+/media/<path>	django.views.static.serve
