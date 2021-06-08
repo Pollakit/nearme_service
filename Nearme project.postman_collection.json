@@ -289,12 +289,7 @@
 											"value": "12",
 											"type": "text"
 										}
-									],
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{url}}/api/accounts/customers/",
@@ -338,7 +333,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/user/3/",
+									"raw": "{{url}}/api/accounts/customers/user/10/",
 									"host": [
 										"{{url}}"
 									],
@@ -347,7 +342,7 @@
 										"accounts",
 										"customers",
 										"user",
-										"3",
+										"10",
 										""
 									]
 								}
@@ -459,12 +454,7 @@
 											"type": "file",
 											"src": "/D:/Desktops/stuff picture/se directory/jia2.png"
 										}
-									],
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{url}}/api/accounts/shopowners/",
@@ -3154,6 +3144,28 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get uncomplete order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/orders/uncompleteOrder/shop/1/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"uncompleteOrder",
+										"shop",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -3183,8 +3195,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://nearme-kmitl.herokuapp.com",
-			"disabled": true
+			"value": "https://nearme-kmitl.herokuapp.com"
 		},
 		{
 			"key": "url",
@@ -3192,13 +3203,11 @@
 		},
 		{
 			"key": "csrftoken",
-			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs",
-			"disabled": true
+			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs"
 		},
 		{
 			"key": "url",
-			"value": "https://quick-vampirebat-31.loca.lt",
-			"disabled": true
+			"value": "https://quick-vampirebat-31.loca.lt"
 		}
 	]
 }
