@@ -45,9 +45,8 @@ class ShopSellHistory(generics.ListAPIView):
         shopID = self.kwargs['pk']
         return Order.objects.filter(shop__id=shopID)
 
+
 # Shop
-
-
 class UncompletedOrder(generics.ListAPIView):
     serializer_class = OrderSerializer
 

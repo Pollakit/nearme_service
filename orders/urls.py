@@ -3,7 +3,8 @@
 from django.urls import path
 from .views import (OrderList, OrderDetail, UpdateOrderStateView,
                     OrderedProductList,
-                    CustomerOrderHistory, ShopSellHistory)
+                    CustomerOrderHistory, ShopSellHistory,
+                    UncompletedOrder)
 
 urlpatterns = [
     path('orders/', OrderList.as_view()),
@@ -15,4 +16,6 @@ urlpatterns = [
     # Record
     path('orders/customer/<int:pk>/', CustomerOrderHistory.as_view()),
     path('orders/shop/<int:pk>/', ShopSellHistory.as_view()),
+
+    path('uncompleteOrder/shop/<int:pk>/', UncompletedOrder.as_view()),
 ]
