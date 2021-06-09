@@ -27,7 +27,7 @@ class CustomUser(AbstractUser):
 
 class Customer(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name=_(
-        "user"), on_delete=models.CASCADE, null=True)  # null = False
+        "user"), on_delete=models.CASCADE, null=False)  # null = False
 
     class Meta:
         verbose_name = _("Customer")
@@ -42,7 +42,7 @@ class Customer(models.Model):
 
 class ShopOwner(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name=_(
-        "user"), on_delete=models.CASCADE, null=True)  # null = False
+        "user"), on_delete=models.CASCADE, null=False)  # null = False
     # shop = models.ForeignKey(Shop, verbose_name=_(
     #     "shop"), on_delete=models.SET_NULL, null=True)
     homeAddress = models.TextField(blank=False, null=True)  # null = False
@@ -62,7 +62,7 @@ class ShopOwner(models.Model):
 
 class MarketAdmin(models.Model):
     user = models.ForeignKey(CustomUser, verbose_name=_(
-        "user"), on_delete=models.CASCADE, null=True)
+        "user"), on_delete=models.CASCADE, null=False)
     # marketChain = models.ForeignKey(MarketChain, verbose_name=_(
     #     "MarketChain"), on_delete=models.SET_NULL, null=True)
     image = models.ImageField(

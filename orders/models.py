@@ -59,7 +59,7 @@ class OrderedProduct(models.Model):
     product = models.ForeignKey(
         "shops.Product", verbose_name="ProductID", on_delete=models.SET_NULL, null=True)
     price = models.FloatField(
-        verbose_name="OrderedProductPrice", blank=True, null=True, default=0.0)
+        verbose_name="OrderedProductPrice", blank=False, null=False, default=0.0)
 
 
 class OrderedDecorator(models.Model):
@@ -68,4 +68,4 @@ class OrderedDecorator(models.Model):
     decorator = models.ForeignKey(
         "shops.Decorator", verbose_name="DecoratorID", on_delete=models.SET_NULL, null=True)
     price = models.FloatField(
-        verbose_name="OrderedDecoratorPrice", blank=True, null=True, default=0.0)
+        verbose_name="OrderedDecoratorPrice", blank=False, null=False, default=0.0)
