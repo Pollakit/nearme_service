@@ -80,7 +80,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     delverylocation = serializers.SerializerMethodField(
         "getMainDelveryLocation")
 
-    # user = CustomUserDetailsSerializer()
+    user = CustomUserDetailsSerializer(many=False)
 
     class Meta:
         model = Customer
@@ -122,7 +122,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class ShopOwnerSerializer(serializers.ModelSerializer):
-    # user = CustomUserSerializer(many=False)
+    user = CustomUserSerializer(many=False)
 
     class Meta:
         model = ShopOwner
