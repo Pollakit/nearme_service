@@ -76,6 +76,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
+class RoughCustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ['id', 'user']
+
+
 class CustomerSerializer(serializers.ModelSerializer):
     delverylocation = serializers.SerializerMethodField(
         "getMainDelveryLocation")
@@ -119,6 +125,12 @@ class CustomerSerializer(serializers.ModelSerializer):
 
         user.save()
         return instance
+
+
+class RoughShopOwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShopOwner
+        fields = ['id', 'user', 'homeAddress', 'image', ]
 
 
 class ShopOwnerSerializer(serializers.ModelSerializer):

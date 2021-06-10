@@ -4,7 +4,10 @@ from django.shortcuts import render
 from rest_framework import generics
 
 from .models import CustomUser, Customer, ShopOwner, MarketAdmin
-from .serializers import CustomUserSerializer, CustomerSerializer, ShopOwnerSerializer, MarketAdminSerializer
+from .serializers import (CustomUserSerializer,
+                          CustomerSerializer, RoughCustomerSerializer,
+                          ShopOwnerSerializer, RoughShopOwnerSerializer,
+                          MarketAdminSerializer)
 
 
 # User
@@ -21,7 +24,7 @@ class UserDetail(generics.RetrieveAPIView):
 # Customer
 class CustomerList(generics.ListCreateAPIView):
     queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+    serializer_class = RoughCustomerSerializer
 
 
 class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -40,7 +43,7 @@ class UserViewCustomerDetail(generics.ListAPIView):
 # ShopOwner
 class ShopOwnerList(generics.ListCreateAPIView):
     queryset = ShopOwner.objects.all()
-    serializer_class = ShopOwnerSerializer
+    serializer_class = RoughShopOwnerSerializer
 
 
 class ShopOwnerDetail(generics.RetrieveUpdateAPIView):
