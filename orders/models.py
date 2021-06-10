@@ -3,7 +3,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.postgres.fields.array import ArrayField
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator
 
 # Order
 #     -Product +Price
@@ -19,7 +19,7 @@ class Order(models.Model):
     shop = models.ForeignKey(
         "shops.Shop", verbose_name="ShopID", on_delete=models.SET_NULL, null=True)
     totalPrice = models.FloatField(
-        verbose_name="TotalPrice", blank=False, null=False)
+        verbose_name="TotalPrice", blank=False, null=False, validators=[MinValueValidator(0.0)])
 
     class States(models.TextChoices):
         CANCEL = "CANCEL"
@@ -58,8 +58,10 @@ class OrderedProduct(models.Model):
 
     product = models.ForeignKey(
         "shops.Product", verbose_name="ProductID", on_delete=models.SET_NULL, null=True)
-    price = models.FloatField(
-        verbose_name="OrderedProductPrice", blank=False, null=False, default=0.0)
+    pricePerUnit = models.FloatField(
+        verbose_name="OrderedProductPricePerUnit", blank=False, null=False, default=0.0, validators=[MinValueValidator(0.0)])
+    quantity = models.PositiveIntegerField(
+        verbose_name="Quantity", blank=False, null=False, default=0)
 
 
 class OrderedDecorator(models.Model):
@@ -67,5 +69,7 @@ class OrderedDecorator(models.Model):
         OrderedProduct, verbose_name="OrderedProductID", on_delete=models.CASCADE)
     decorator = models.ForeignKey(
         "shops.Decorator", verbose_name="DecoratorID", on_delete=models.SET_NULL, null=True)
-    price = models.FloatField(
-        verbose_name="OrderedDecoratorPrice", blank=False, null=False, default=0.0)
+    pricePerUnit = models.FloatField(
+        verbose_name="OrderedDecoratorPricePerUnit", blank=False, null=False, default=0.0, validators=[MinValueValidator(0.0)])
+    quantity = models.PositiveIntegerField(
+        verbose_name="Quantity", blank=False, null=False, default=0)

@@ -9,7 +9,8 @@ from accounts.serializers import CustomerSerializer
 class OrderedDecoratorSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderedDecorator
-        fields = ['id', 'orderedProduct', 'decorator', 'price']
+        fields = ['id', 'orderedProduct',
+                  'decorator', 'pricePerUnit', 'quantity']
         read_only_fields = ['id', 'orderedProduct']
 
 
@@ -20,7 +21,8 @@ class OrderedProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderedProduct
-        fields = ['id', 'order', 'product', 'price', 'decorators']
+        fields = ['id', 'order', 'product',
+                  'pricePerUnit', 'quantity', 'decorators']
         read_only_fields = ['id']
 
     # def getDecorators(self, obj):
