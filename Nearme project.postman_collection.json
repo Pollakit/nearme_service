@@ -270,6 +270,71 @@
 					"name": "For Customer",
 					"item": [
 						{
+							"name": "User registration",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "market01",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "market01@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password1",
+											"value": "pp123456789",
+											"type": "text"
+										},
+										{
+											"key": "password2",
+											"value": "pp123456789",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "market",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "one",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "0888888888",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "SHOPOWNER",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/dj-rest-auth/registration/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"dj-rest-auth",
+										"registration",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create Customer",
 							"request": {
 								"method": "POST",
@@ -286,7 +351,7 @@
 									"formdata": [
 										{
 											"key": "user",
-											"value": "12",
+											"value": "2",
 											"type": "text"
 										}
 									]
@@ -308,11 +373,25 @@
 						},
 						{
 							"name": "Get Customer id 1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/18/",
+									"raw": "{{url}}/api/accounts/customers/8",
 									"host": [
 										"{{url}}"
 									],
@@ -320,8 +399,7 @@
 										"api",
 										"accounts",
 										"customers",
-										"18",
-										""
+										"8"
 									]
 								}
 							},
@@ -397,7 +475,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\",\r\n            \"phone\": \"0888888888\"\r\n        }\r\n}",
+									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\"\r\n        }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -405,7 +483,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/1/",
+									"raw": "{{url}}/api/accounts/customers/9/",
 									"host": [
 										"{{url}}"
 									],
@@ -413,7 +491,7 @@
 										"api",
 										"accounts",
 										"customers",
-										"1",
+										"9",
 										""
 									]
 								}
@@ -425,6 +503,71 @@
 				{
 					"name": "For ShopOwner",
 					"item": [
+						{
+							"name": "User registration",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "shop02",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "shop02@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password1",
+											"value": "pp123456789",
+											"type": "text"
+										},
+										{
+											"key": "password2",
+											"value": "pp123456789",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "shop",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "two",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "0888888888",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "SHOPOWNER",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/dj-rest-auth/registration/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"dj-rest-auth",
+										"registration",
+										""
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "create Shopowner",
 							"request": {
@@ -479,18 +622,18 @@
 									{
 										"key": "X-CSRFToken",
 										"value": "{{csrftoken}}",
-										"type": "text"
+										"type": "text",
+										"disabled": true
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/D:/Desktops/stuff picture/Project/kekw.jpg"
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Shop\",\r\n            \"last_name\": \"One\"\r\n        }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "{{url}}/api/accounts/shopowners/1/",
@@ -2249,7 +2392,8 @@
 											{
 												"key": "X-CSRFToken",
 												"value": "{{csrftoken}}",
-												"type": "text"
+												"type": "text",
+												"disabled": true
 											}
 										],
 										"body": {
@@ -2262,13 +2406,13 @@
 												},
 												{
 													"key": "name",
-													"value": "ตำไทยไข่เค็ม",
+													"value": "ตำไทยไข่เค็ม V2",
 													"type": "text"
 												},
 												{
 													"key": "main_image",
 													"type": "file",
-													"src": "/D:/Desktops/stuff picture/Project/ตำไทย.jpg"
+													"src": []
 												},
 												{
 													"key": "more_images",
@@ -2288,6 +2432,16 @@
 												{
 													"key": "is_active",
 													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "decorators",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "decorators",
+													"value": "2",
 													"type": "text"
 												}
 											]
@@ -2337,7 +2491,8 @@
 											{
 												"key": "X-CSRFToken",
 												"value": "{{csrftoken}}",
-												"type": "text"
+												"type": "text",
+												"disabled": true
 											}
 										],
 										"body": {
@@ -2358,8 +2513,7 @@
 												{
 													"key": "main_image",
 													"type": "file",
-													"src": "/D:/Desktops/stuff picture/Project/ส้ำตำ.jpg",
-													"disabled": true
+													"src": "/D:/Desktops/stuff picture/Project/ตำไทย.jpg"
 												},
 												{
 													"key": "more_images",
@@ -2369,9 +2523,8 @@
 												},
 												{
 													"key": "desc",
-													"value": "ตำไทย ไม่ใส่ปลาร้า เพิ่มไข่เค็ม",
-													"type": "text",
-													"disabled": true
+													"value": "ตำไทย ไม่ใส่ปลาร้า เพิ่มไข่เค็ม v2",
+													"type": "text"
 												},
 												{
 													"key": "price",
@@ -2382,22 +2535,25 @@
 												{
 													"key": "is_active",
 													"value": "true",
-													"type": "text"
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "decorators",
 													"value": "1",
-													"type": "text"
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "decorators",
 													"value": "3",
-													"type": "text"
+													"type": "text",
+													"disabled": true
 												}
 											]
 										},
 										"url": {
-											"raw": "{{url}}/api/shops/products/1/",
+											"raw": "{{url}}/api/shops/products/5/",
 											"host": [
 												"{{url}}"
 											],
@@ -2405,7 +2561,7 @@
 												"api",
 												"shops",
 												"products",
-												"1",
+												"5",
 												""
 											]
 										}
@@ -2597,6 +2753,28 @@
 									"response": []
 								},
 								{
+									"name": "Get all menu category in shop 1",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/menucategories/shop/1/",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"menucategories",
+												"shop",
+												"1",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Get shop details",
 									"request": {
 										"method": "GET",
@@ -2767,7 +2945,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/api/shops/products/market/3/search/?search=ไข่",
+											"raw": "{{url}}/api/shops/products/market/1/search/?search=ไข่",
 											"host": [
 												"{{url}}"
 											],
@@ -2776,7 +2954,7 @@
 												"shops",
 												"products",
 												"market",
-												"3",
+												"1",
 												"search",
 												""
 											],
@@ -2824,7 +3002,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/api/shops/decorators/product/1/",
+											"raw": "{{url}}/api/shops/decorators/product/6/",
 											"host": [
 												"{{url}}"
 											],
@@ -2833,7 +3011,7 @@
 												"shops",
 												"decorators",
 												"product",
-												"1",
+												"6",
 												""
 											]
 										}
@@ -2873,7 +3051,7 @@
 										},
 										{
 											"key": "customer",
-											"value": "2",
+											"value": "1",
 											"type": "text"
 										},
 										{
@@ -2883,12 +3061,12 @@
 										},
 										{
 											"key": "deliveryLocation",
-											"value": "1",
+											"value": "2",
 											"type": "text"
 										},
 										{
 											"key": "deliveryNote",
-											"value": "floor 8",
+											"value": "floor 6",
 											"type": "text"
 										}
 									]
@@ -2921,7 +3099,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"order\":3,\r\n    \"product\":1,\r\n    \"price\":40,\r\n    \"decorators\": [\r\n            {\r\n                \"decorator\": 1,\r\n                \"price\": 0.0\r\n            },\r\n            {\r\n                \"decorator\": 2,\r\n                \"price\": 0.0\r\n            }\r\n        ]\r\n    \r\n}",
+									"raw": "{\r\n    \"order\":1,\r\n    \"product\":1,\r\n    \"pricePerUnit\":40,\r\n    \"quantity\":1,\r\n    \"decorators\": [\r\n            {\r\n                \"decorator\": 1,\r\n                \"pricePerUnit\": 0.0,\r\n                \"quantity\":1\r\n            },\r\n            {\r\n                \"decorator\": 2,\r\n                \"pricePerUnit\": 0.0,\r\n                \"quantity\":1\r\n            }\r\n        ]\r\n    \r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3199,15 +3377,18 @@
 		},
 		{
 			"key": "url",
-			"value": "http://127.0.0.1:8000"
+			"value": "http://127.0.0.1:8000",
+			"disabled": true
 		},
 		{
 			"key": "csrftoken",
-			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs"
+			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs",
+			"disabled": true
 		},
 		{
 			"key": "url",
-			"value": "https://quick-vampirebat-31.loca.lt"
+			"value": "https://quick-vampirebat-31.loca.lt",
+			"disabled": true
 		}
 	]
 }
