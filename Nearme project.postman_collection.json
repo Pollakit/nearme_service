@@ -25,7 +25,7 @@
 							"formdata": [
 								{
 									"key": "username",
-									"value": "billPollakit",
+									"value": "cus04",
 									"type": "text"
 								},
 								{
@@ -36,7 +36,7 @@
 								},
 								{
 									"key": "password",
-									"value": "PP123456789",
+									"value": "pp123456789",
 									"type": "text"
 								}
 							]
@@ -391,7 +391,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/8",
+									"raw": "{{url}}/api/accounts/customers/2",
 									"host": [
 										"{{url}}"
 									],
@@ -399,7 +399,7 @@
 										"api",
 										"accounts",
 										"customers",
-										"8"
+										"2"
 									]
 								}
 							},
@@ -411,7 +411,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/user/10/",
+									"raw": "{{url}}/api/accounts/customers/user/2/",
 									"host": [
 										"{{url}}"
 									],
@@ -420,7 +420,7 @@
 										"accounts",
 										"customers",
 										"user",
-										"10",
+										"2",
 										""
 									]
 								}
@@ -475,7 +475,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"One\"\r\n        }\r\n}",
+									"raw": "{\r\n    \"user\": {\r\n            \"first_name\": \"Cus\",\r\n            \"last_name\": \"FIVE\"\r\n        }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -483,7 +483,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/api/accounts/customers/9/",
+									"raw": "{{url}}/api/accounts/customers/2/",
 									"host": [
 										"{{url}}"
 									],
@@ -491,7 +491,7 @@
 										"api",
 										"accounts",
 										"customers",
-										"9",
+										"2",
 										""
 									]
 								}
@@ -584,7 +584,7 @@
 									"formdata": [
 										{
 											"key": "user",
-											"value": "8",
+											"value": "7",
 											"type": "text"
 										},
 										{
@@ -987,7 +987,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/api/markets/markets/deliveryLocation/1/",
+									"raw": "{{url}}/api/markets/markets/deliveryLocation/3/",
 									"host": [
 										"{{url}}"
 									],
@@ -996,7 +996,7 @@
 										"markets",
 										"markets",
 										"deliveryLocation",
-										"1",
+										"3",
 										""
 									]
 								}
@@ -2736,7 +2736,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/api/shops/shops/market/3/",
+											"raw": "{{url}}/api/shops/shops/market/1/",
 											"host": [
 												"{{url}}"
 											],
@@ -2745,7 +2745,7 @@
 												"shops",
 												"shops",
 												"market",
-												"3",
+												"1",
 												""
 											]
 										}
@@ -2880,6 +2880,35 @@
 												"favouriteShop",
 												"2",
 												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Search shop in market 1",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/api/shops/shops/market/1/search/?search=อีสาน",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"shops",
+												"shops",
+												"market",
+												"1",
+												"search",
+												""
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "อีสาน"
+												}
 											]
 										}
 									},
@@ -3377,18 +3406,15 @@
 		},
 		{
 			"key": "url",
-			"value": "http://127.0.0.1:8000",
-			"disabled": true
+			"value": "http://127.0.0.1:8000"
 		},
 		{
 			"key": "csrftoken",
-			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs",
-			"disabled": true
+			"value": "GxcB3sXZWH9tfsFCzDM4P7FBvG1FdfaUwh0Aoy0oMI342OfodP832f1E16j3zpjs"
 		},
 		{
 			"key": "url",
-			"value": "https://quick-vampirebat-31.loca.lt",
-			"disabled": true
+			"value": "https://quick-vampirebat-31.loca.lt"
 		}
 	]
 }
