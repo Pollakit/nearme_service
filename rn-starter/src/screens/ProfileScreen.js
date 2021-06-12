@@ -12,7 +12,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 const ProfileScreen = ({ navigation }) => {
 
-  const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/login/';
+  const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/accounts/customers/1/';
 
   const [Customer, setCustomer] = useState([]);
 
@@ -21,20 +21,7 @@ const ProfileScreen = ({ navigation }) => {
   }, []);
 
   const loadData = async () => {
-  const response = await fetch(apiUrl,{
-    //mode: 'no-cors', 
-    method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(
-      {
-        username: 'cus04',
-        password: 'pp123456789',
-      }
-    )
-  });
+  const response = await fetch(apiUrl);
   const data = await response.json();
   setCustomer(data.user);
   console.log(data);

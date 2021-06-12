@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
 export default LoginScreen;
 */
 
-
 import React from 'react';
 import {SafeAreaView, View, Text, TextInput, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -146,17 +145,16 @@ const LoginScreen = ({navigation}) => {
 
   const handleResponse = res => {
     if(res.ok) {
-      return res.json()
+      navigation.navigate('Canteen')
     }
     throw new Error('Network response was not ok.')
   }
 
-  const apicall = () => {
+  const apicall = (username, password) => {
 
     const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/login/';
 
-    fetch(apiUrl, {
-      //mode: 'no-cors', 
+    fetch(apiUrl, { 
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -172,12 +170,11 @@ const LoginScreen = ({navigation}) => {
     .then(data => console.log(data))
     .catch(error => console.log("Error detected: " + error)) 
     
-    navigation.navigate('Canteen')
   }
 
   
   return (
-    <SafeAreaView
+    <View
       style={{paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flexDirection: 'row', marginTop: 40, }}>
@@ -228,13 +225,13 @@ const LoginScreen = ({navigation}) => {
           <View style={{marginHorizontal: 30 , marginVertical:50}}>
           <TouchableOpacity>
               <PrimaryButton 
-              onPress={() => {
-                if (password.trim() === "" || username.trim() === "") {
-                } 
-                else {
-                  //{navigation.navigate('Canteen');};
-                  {apicall()};
-                }
+                onPress={() => {
+                  if (password.trim() === "" || username.trim() === "") {
+                  } 
+                  else {
+                    //{navigation.navigate('Canteen');};
+                    {apicall(username, password)};
+                  }
                 }}
                 title="เข้าสู่ระบบ"/>
           </TouchableOpacity>
@@ -274,7 +271,7 @@ const LoginScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

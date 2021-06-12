@@ -14,11 +14,11 @@ const ProfileScreen = ({ navigation }) => {
 
   const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/login/';
 
-  const [email, setEmail] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [username, setUsername] = useState("");
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState([]);
+  const [fname, setFname] = useState([]);
+  const [lname, setLname] = useState([]);
+  const [username, setUsername] = useState([]);
+  const [phone, setPhone] = useState([]);
 
   return (
     <SafeAreaView
@@ -60,7 +60,7 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={STYLES.input}>นามสกุล: <TextInput style={styles.text}
                                                             defaultValue= {navigation.getParam('lname')}
                                                             placeholderTextColor="#003f5c"
-                                                             onChangeText={(username) => setUsername(username)}/></Text> 
+                                                            onChangeText={(username) => setUsername(username)}/></Text> 
           </View>
 
           <View style={STYLES.inputContainer}>

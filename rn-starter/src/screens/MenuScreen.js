@@ -1,9 +1,9 @@
 import React from 'react';
 import {Dimensions, SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight,
-  TouchableOpacity,} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+  TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
+import { useState, useEffect } from "react";
 import foods from '../consts/foods';
 import {PrimaryButton} from '../components/Button';
 import {DeleteButton} from '../components/Button';
@@ -14,20 +14,36 @@ const cardWidth = width - 20;               //card width constant when we have 2
 
 const MenuScreen = ({navigation}) => {
 
+  const CategoryapiUrl = window.apiurl + 'api/shops/menucategories/customer/shop/' + navigation.getParam('shopid') + '/';
+
+  const [Category, setCategory] = useState([]);
+  const [Cart, setCart] = useState([]);
+
+  useEffect(() => {
+    loadCategoryData();
+  }, []);
+
+  const loadCategoryData = async () => {
+    const response = await fetch(CategoryapiUrl);
+    const data = await response.json();
+    setCategory(data);
+    console.log(data);
+  }
+
   const Card = ({menus}) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('Cart')}>
+        onPress={() => {console.log(menus)}}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-            <Image source={menus.image} style={{height: 120, width: 120, borderRadius: 15}} />
+            <img src={menus.main_image} style={{height: 120, width: 120, borderRadius: 15}} />
           </View>
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>{menus.name}</Text>
             <Text style={{fontSize: 16, color: COLORS.grey, marginTop: 2}}>
-              {menus.decorator}
+              {menus.desc}
             </Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={{fontSize: 18, fontWeight: 'bold'}}>
@@ -42,6 +58,36 @@ const MenuScreen = ({navigation}) => {
       </TouchableHighlight>
     );
   };
+
+  const Categoryhead = ({categories}) => {
+
+    const [Menu, setMenu] = useState([]);
+
+    useEffect(() => {
+      loadMenuData();
+    }, []);
+  
+
+    const loadMenuData = async () => {
+      const response = await fetch(window.apiurl + 'api/shops/products/customer/menucategory/' + categories.id + '/');
+      const data = await response.json();
+      setMenu(data);
+      console.log(data);
+    }
+
+    return (
+        <View>
+            <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 20}}>{categories.name}</Text>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              numColumns={1}
+              data={Menu}
+              renderItem={({item}) => <Card menus={item} />}
+            />
+        </View>
+    );
+  };
+
 
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -61,7 +107,7 @@ const MenuScreen = ({navigation}) => {
               <Text style={{fontSize: 22, fontWeight: 'bold'}}>กรุณาเลือกรายการอาหารภายใน</Text>
             </View>
             <Text style={{marginTop: 5, fontSize: 22, color: COLORS.primary}}>
-              ร้านป้าตามสั่ง โรงพระเทพ
+              {navigation.getParam('shopname')}
             </Text>
         </View>  
       </View>
@@ -69,14 +115,16 @@ const MenuScreen = ({navigation}) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         numColumns={1}
-        data={foods}
-        renderItem={({item}) => <Card menus={item} />}
+        data={Category}
+        renderItem={({item}) => <Categoryhead categories={item} />}
       />
+      
     </View>
   );
 };
 
 const style = StyleSheet.create({
+  
   header: {
     marginTop: 20,
     flexDirection: 'row',
@@ -122,6 +170,7 @@ const style = StyleSheet.create({
     marginLeft: 125,
     marginTop: 20,
   },// Margin left is added later
+  
 });
 
 export default MenuScreen;

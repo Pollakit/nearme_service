@@ -168,7 +168,7 @@ import {PrimaryButton} from '../components/Button';
 
 const SignupScreen = ({navigation}) => {
   return (
-    <SafeAreaView
+    <View
       style={{paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flexDirection: 'row', marginTop: 40, }}>
@@ -294,7 +294,7 @@ const SignupScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

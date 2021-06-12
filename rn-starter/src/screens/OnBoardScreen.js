@@ -12,15 +12,15 @@ const OnBoardScreen = ({navigation}) => {
           style={{
             width: '100%',
             resizeMode: 'contain',
-            top: 40,
+            top: -150,
           }}
-          source={require('../assets/kmitlLogo.png')}
+          source={require('../assets/cheesePizza.png')}
         />
       </View>
       <View style={style.textContainer}>
         <View>
           <Text style={{fontSize: 32, fontWeight: 'bold', textAlign: 'center'}}>
-            Near Me screencheck
+            Near Me Delivery Service
           </Text>
           <Text
             style={{
@@ -32,7 +32,11 @@ const OnBoardScreen = ({navigation}) => {
             หาร้านอาหารใกล้ตัวคุณได้ที่เรา
           </Text>
         </View>
-        
+        <View style={style.indicatorContainer}>
+          <View style={style.currentIndicator} />
+          <View style={style.indicator} />
+          <View style={style.indicator} />
+        </View>
         <PrimaryButton
           onPress={() => navigation.navigate('Sign')}
           title="สมัครเข้าใช้"
