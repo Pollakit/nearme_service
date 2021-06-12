@@ -52,7 +52,7 @@ class ShopListByMarket(generics.ListAPIView):
 
 class ShopSearch(generics.ListAPIView):
     # permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Shop.objects.all()
+    # queryset = Shop.objects.all()
     serializer_class = RoughShopSerializer
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -60,6 +60,10 @@ class ShopSearch(generics.ListAPIView):
 
     search_fields = ['name', 'desc', 'categories__name']
     ordering_fields = ['name']
+
+    def get_queryset(self):
+        marketID = self.kwargs['pk']
+        return Shop.objects.filter(market__id=marketID, is_active=True)
 
 
 # ShopCategory

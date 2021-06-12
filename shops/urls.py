@@ -1,7 +1,7 @@
 # shops/urls.py
 from django.urls import path
 from .views import (ShopCategoryList, ShopCategoryDetail, ShopCategorySearch,
-                    ShopList, ShopListByMarket, ShopDetail,
+                    ShopList, ShopListByMarket, ShopDetail, ShopSearch,
                     MenuCategoryList, MenuCategoryListByShop, CustomerViewMenuCategoryListByShop, MenuCategoryDetail,
                     ProductList, ProductListByMenuCategory, ProductDetail, ProductSearch, CustomerViewProductListByMenuCategory,
                     DecoratorList, DecoratorListByShop, DecoratorListByProduct, DecoratorDetail,
@@ -14,6 +14,7 @@ urlpatterns = [
     path('shops/', ShopList.as_view()),
     path('shops/market/<int:pk>/', ShopListByMarket.as_view()),
     path('shops/<int:pk>/', ShopDetail.as_view()),
+    path('shops/market/<int:pk>/search/', ShopSearch.as_view()),
 
 
     # ShopCategory
