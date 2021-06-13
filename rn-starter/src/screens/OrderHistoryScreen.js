@@ -1,6 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, Text, Image, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useState, useEffect } from "react";
 import COLORS from '../consts/colors';
 import {PrimaryButton} from '../components/Button';
 import {MiniButton} from '../components/Button';
@@ -8,6 +9,21 @@ import {SecondaryButton} from '../components/Button';
 import orderHistory from '../consts/orderHistory';
 
 const OrderHistoryScreen = ({navigation}) => {
+
+  const apiUrl = window.apiurl + 'api/orders/orders/customer/1/';
+
+  const [Order, setOrder] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      setOrder(data);
+      console.log(data);
+  }
 
   const CartCard = ({item}) => {
     return (
@@ -27,7 +43,7 @@ const OrderHistoryScreen = ({navigation}) => {
         </View>
         <View style={{marginRight: 20, alignItems: 'center'}}>
           <Text style={{marginBottom:10, marginTop: 5, fontWeight: 'bold', fontSize: 16, color: COLORS.maroon}}>{item.status}</Text>
-          <MiniButton title="  ดูรายละเอียด  " onPress={() => navigation.navigate('Order')}/>
+          <MiniButton title="  ดูรายละเอียด  " onPress={() => {navigation.navigate('Order', {orderid: Order.id})}}/>
         </View>
       </View>
     );

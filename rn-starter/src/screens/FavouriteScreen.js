@@ -12,6 +12,7 @@ import {
   TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
+import { useState, useEffect } from "react";
 import favorite from '../consts/favorite';
 
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
@@ -23,25 +24,65 @@ const cardWidth = width - 20;               //card width constant when we have 2
 
 
 const FavoriteScreen = ({navigation}) => {
+
+  const [Favshops, setFavshops] = useState([]);
+  const [dummy, reload] = useState(false);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      FavShopsloadData();
+     }, 1000)
+  }, [dummy]);
+
+ const FavShopsloadData = async () => {
+    const response = await fetch(window.apiurl + 'api/shops/favouriteShop/customer/1/');
+    const data = await response.json();
+    setFavshops(data);
+    console.log(data);
+  }
+
+  const deletefav = (favid) => {
+    const apiUrl = window.apiurl + 'api/shops/favouriteShop/' + favid + '/';
+    fetch(apiUrl, { 
+      method: 'delete'
+    }).then(res => res.text()) // or res.json()
+    .then(res => console.log(res))
+  }
+
   const Card = ({favorite}) => {
+
+    const [Shops, setShops] = useState([]);
+
+    useEffect(() => {
+      ShopsloadData();
+    }, []);
+  
+   const ShopsloadData = async () => {
+      const response = await fetch(window.apiurl + 'api/shops/shops/' + favorite.shop + '/');
+      const data = await response.json();
+      setShops(data);
+      console.log(data);
+    }
+
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('Menu')}>
+        onPress={() => navigation.navigate(('Menu'), {shopid: Shops.id, shopname: Shops.name})}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-            <Image source={favorite.image} style={{height: 120, width: 120, borderRadius: 15}} />
+            <img src={Shops.main_image} style={{height: 120, width: 120, borderRadius: 15}} />
           </View>
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{favorite.name}</Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{Shops.name}</Text>
             <Text style={{fontSize: 16, color: COLORS.grey, marginTop: 2}}>
-              {favorite.category}
+              {Shops.desc}
             </Text>
             <View style={{flexDirection: 'row'}}>
-              <View style={style.addToFavoriteBtn}>
+              <TouchableHighlight style={style.addToFavoriteBtn} 
+                  onPress={() => [deletefav(favorite.id), reload(!dummy)]}>
                   <Icon name="star" size={20} color={COLORS.white} />
-              </View>
+              </TouchableHighlight >
             </View>
           </View>
         </View>
@@ -83,7 +124,7 @@ const FavoriteScreen = ({navigation}) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         numColumns={1}
-        data={favorite}
+        data={Favshops}
         renderItem={({item}) => <Card favorite={item} />}
       />
     </View>

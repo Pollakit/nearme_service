@@ -79,7 +79,7 @@ const CanteenScreen = ({navigation}) => {
             <Text style={{fontSize: 22, fontWeight: 'bold'}}>กรุณาเลือกโรงอาหารภายใน</Text>
           </View>
           <Text style={{marginTop: 5, fontSize: 22, color: COLORS.primary}}>
-            KMITL
+            มหาวิทยาลัยพระจอมเกล้าลาดกระบัง
           </Text>
           <View
         style={{

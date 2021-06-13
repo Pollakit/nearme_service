@@ -4,8 +4,26 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import {SecondaryButton} from '../components/Button';
+import { useState, useEffect } from "react";
+
 
 const OrderDetailsScreen = ({navigation}) => {
+
+  const apiUrl = window.apiurl + 'api/orders/orders/'+ 1 + '/';
+
+  const [Orderdetail, setOrderdetail] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      setOrderdetail(data);
+      console.log(data);
+  }
+
 
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white}}>

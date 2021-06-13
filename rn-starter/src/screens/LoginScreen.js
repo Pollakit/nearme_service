@@ -169,7 +169,6 @@ const LoginScreen = ({navigation}) => {
     }).then(handleResponse)
     .then(data => console.log(data))
     .catch(error => console.log("Error detected: " + error)) 
-    
   }
 
   

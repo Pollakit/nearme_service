@@ -21,7 +21,6 @@ const ShopScreen = ({navigation}) => {
     ShopsloadData();
   }, [Search]);
 
-
  const ShopsloadData = async () => {
    if (Search.length == 0) {
     const response = await fetch(window.apiurl + 'api/shops/shops/market/' + navigation.getParam('canteenid') + '/');
@@ -34,12 +33,39 @@ const ShopScreen = ({navigation}) => {
     setShops(data);
     console.log(data);
    }
+  }
 
+  const handleResponse = res => {
+    if(res.ok) {
+      return res.json()
+    }
+    throw new Error('Network response was not ok.')
+  }
+
+  const apicall = (userid, storeid) => {
+
+    const apiUrl = window.apiurl + 'api/shops/favouriteShop/';
+    fetch(apiUrl, { 
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          customer: userid,
+          shop: storeid,
+        }
+      )
+    }).then(handleResponse)
+    .then(data => console.log(data))
+    .catch(error => console.log("Error detected: " + error)) 
   }
 
 
 
   const Card = ({stores}) => {
+    const category = JSON.stringify(stores.category);
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -52,12 +78,13 @@ const ShopScreen = ({navigation}) => {
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>{stores.name}</Text>
             <Text style={{fontSize: 16, color: COLORS.grey, marginTop: 2}}>
-              {stores.category}
+              {stores.categories[0].name}
             </Text>
             <View style={{flexDirection: 'row'}}>
-              <View style={style.addToFavoriteBtn}>
+              <TouchableHighlight style={style.addToFavoriteBtn} 
+                  onPress={() => {apicall(1, stores.id)}}>
                   <Icon name="star" size={20} color={COLORS.white} />
-              </View>
+              </TouchableHighlight >
             </View>
           </View>
         </View>
