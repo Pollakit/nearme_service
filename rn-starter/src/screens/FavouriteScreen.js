@@ -9,11 +9,11 @@ import {
   ScrollView,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity} from 'react-native';
+  TouchableOpacity,
+  RefreshControl} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import { useState, useEffect } from "react";
-import favorite from '../consts/favorite';
 
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
 const cardWidth = width - 20;               //card width constant when we have 2 cards per row
@@ -27,6 +27,15 @@ const FavoriteScreen = ({navigation}) => {
 
   const [Favshops, setFavshops] = useState([]);
   const [dummy, reload] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    setTimeout(()=>{
+      FavShopsloadData();
+     }, 1000)
+      setRefreshing(false)
+  }, [refreshing]);
 
   useEffect(() => {
     setTimeout(()=>{
@@ -71,7 +80,7 @@ const FavoriteScreen = ({navigation}) => {
         onPress={() => navigation.navigate(('Menu'), {shopid: Shops.id, shopname: Shops.name})}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-            <img src={Shops.main_image} style={{height: 120, width: 120, borderRadius: 15}} />
+            <Image source={{uri:Shops.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
           </View>
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>{Shops.name}</Text>
@@ -126,6 +135,7 @@ const FavoriteScreen = ({navigation}) => {
         numColumns={1}
         data={Favshops}
         renderItem={({item}) => <Card favorite={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </View>
   );

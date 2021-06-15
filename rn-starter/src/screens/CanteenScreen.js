@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, View, Dimensions,TouchableHighlight, TextInput} from 'react-native';
+import { Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, View, Dimensions,TouchableHighlight, TextInput, RefreshControl} from 'react-native';
 import { useState, useEffect } from "react";
 //import TabNavigator from '../navigations/BottomNavigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -17,6 +17,13 @@ const CanteenScreen = ({navigation}) => {
 
   const [Canteens, setCanteens] = useState([]);
   const [Search, setSearch] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    loadData();
+    setRefreshing(false)
+  }, [refreshing]);
 
   useEffect(() => {
     loadData();
@@ -44,7 +51,7 @@ const CanteenScreen = ({navigation}) => {
       onPress={() => {navigation.navigate('Shop', {canteenid: canteen.id, canteenname: canteen.name})}}>
       <View style={style.card}>
         <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-          <img src={canteen.main_image} style={{height: 100, width: 120, borderRadius: 15}} />
+          <Image source={{uri:canteen.main_image}} style={{height: 100, width: 120, borderRadius: 15}} />
         </View>
         <View style={{marginHorizontal: 20, marginVertical: -80}}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>{canteen.name}</Text>
@@ -105,6 +112,7 @@ const CanteenScreen = ({navigation}) => {
         numColumns={1}
         data={Canteens}
         renderItem={({item}) => <MenuDetail canteen={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
       
     </View>

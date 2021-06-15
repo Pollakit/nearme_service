@@ -1,10 +1,10 @@
 import React from 'react';
 import {Dimensions, SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight,
-  TouchableOpacity, FlatList} from 'react-native';
+  TouchableOpacity, FlatList, RefreshControl} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import { useState, useEffect } from "react";
-import foods from '../consts/foods';
 import {PrimaryButton} from '../components/Button';
 import {DeleteButton} from '../components/Button';
 import {MiniButton} from '../components/Button';
@@ -18,6 +18,13 @@ const MenuScreen = ({navigation}) => {
 
   const [Category, setCategory] = useState([]);
   const [Cart, setCart] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    loadCategoryData();
+    setRefreshing(false)
+  }, [refreshing]);
 
   useEffect(() => {
     loadCategoryData();
@@ -38,7 +45,7 @@ const MenuScreen = ({navigation}) => {
         onPress={() => {console.log(menus)}}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-            <img src={menus.main_image} style={{height: 120, width: 120, borderRadius: 15}} />
+            <Image source={{uri:menus.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
           </View>
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>{menus.name}</Text>
@@ -117,6 +124,7 @@ const MenuScreen = ({navigation}) => {
         numColumns={1}
         data={Category}
         renderItem={({item}) => <Categoryhead categories={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
       
     </View>

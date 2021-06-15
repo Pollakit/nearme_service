@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, View, Dimensions,TouchableHighlight, TextInput } from 'react-native';
+import { Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, View, Dimensions,TouchableHighlight, TextInput, RefreshControl } from 'react-native';
 import { useState, useEffect } from "react";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
@@ -16,12 +16,20 @@ const ShopScreen = ({navigation}) => {
 
   const [Shops, setShops] = useState([]);
   const [Search, setSearch] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    ShopsloadData();
+    setRefreshing(false)
+  }, [refreshing]);
+
 
   useEffect(() => {
     ShopsloadData();
   }, [Search]);
 
- const ShopsloadData = async () => {
+ const c = async () => {
    if (Search.length == 0) {
     const response = await fetch(window.apiurl + 'api/shops/shops/market/' + navigation.getParam('canteenid') + '/');
     const data = await response.json();
@@ -73,7 +81,7 @@ const ShopScreen = ({navigation}) => {
         onPress={() => navigation.navigate(('Menu'), {shopid: stores.id, shopname: stores.name})}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
-            <img src={stores.main_image} style={{height: 120, width: 120, borderRadius: 15}} />
+            <Image source={{uri:stores.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
           </View>
           <View style={{marginHorizontal: 20, marginVertical: -80}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>{stores.name}</Text>
@@ -162,6 +170,7 @@ const ShopScreen = ({navigation}) => {
         numColumns={1}
         data={Shops}
         renderItem={({item}) => <Card stores={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
       />
     </View>
   );
