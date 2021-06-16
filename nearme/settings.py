@@ -26,8 +26,6 @@ APPEND_SLASH = True
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# DEBUG = False
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 
@@ -64,7 +62,7 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
-    # 'allauth.socialaccount',
+    'allauth.socialaccount',
 
     'dj_rest_auth',
     'dj_rest_auth.registration',
@@ -86,7 +84,6 @@ INSTALLED_APPS = [
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
@@ -94,9 +91,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = 'Nearme service Team <noreply@nearme.com>'
-
-
 SITE_ID = 1
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
