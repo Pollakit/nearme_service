@@ -3,6 +3,7 @@ import { Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, View, 
 import { useState, useEffect } from "react";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
@@ -70,6 +71,10 @@ const ShopScreen = ({navigation}) => {
     .catch(error => console.log("Error detected: " + error)) 
   }
 
+  const storeshopid = (sid) => {
+    AsyncStorage.setItem('shopid', sid);
+};
+
 
 
   const Card = ({stores}) => {
@@ -78,7 +83,7 @@ const ShopScreen = ({navigation}) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate(('Menu'), {shopid: stores.id, shopname: stores.name})}>
+        onPress={() => {navigation.navigate(('Menu'), {shopid: stores.id, shopname: stores.name}), storeshopid(stores.id)}}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
             <Image source={{uri:stores.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
@@ -157,9 +162,6 @@ const ShopScreen = ({navigation}) => {
             placeholder="ค้นหาร้านอาหาร"
             onChangeText={(Search) => setSearch(Search)}
           />
-        </View>
-        <View style={style.searchBtn}>
-          <Icon name="search" size={28} color={COLORS.white} />
         </View>
       </View>
         </View>

@@ -67,11 +67,11 @@ const switchNavigator = createSwitchNavigator({
             tabBarLabel:'Favourite',  
             tabBarIcon: ({ tintColor }) => (  
               <View>  
-                  <Icon style={[{color: tintColor}]} size={25} name={'ios-images'}/>  
+                  <Icon style={[{color: tintColor}]} size={25} name={'ios-star'}/>  
               </View>),  
             activeColor: '#615af6',  
             inactiveColor: '#46f6d7',  
-            barStyle: { backgroundColor: '#67baf6' },  
+            barStyle: { backgroundColor: '#f69b31' },  
           }  
         },
 
@@ -104,16 +104,16 @@ const switchNavigator = createSwitchNavigator({
         initialRouteName: "Home",  
         activeColor: '#f0edf6',  
         inactiveColor: '#226557',  
-        barStyle: { backgroundColor: '#3BAD87' },
+        barStyle: { backgroundColor: '#f69b31' },
         navigationOptions: { headerShown:false }
       }),
 
-      Menuflow: createSwitchNavigator({
+      Menu: createSwitchNavigator({
         Menu:  MenuScreen,
         Cart: CartScreen
       }),
       
-      Orderflow: createSwitchNavigator({
+      Order: createSwitchNavigator({
         Order:  OrderDetailsScreen
       }),
 

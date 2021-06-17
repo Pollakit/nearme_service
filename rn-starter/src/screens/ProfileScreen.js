@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Text, StyleSheet, View, Button, TouchableOpacity, TextInput, Image } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, View, Button, TouchableOpacity, TextInput, Image, FlatList, } from 'react-native';
 import { useState, useEffect } from "react";
 import InputBox from '../components/InputBox';
 import {PrimaryButton} from '../components/Button';
@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import STYLES from '../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 
 
@@ -23,12 +25,54 @@ const ProfileScreen = ({ navigation }) => {
   const loadData = async () => {
   const response = await fetch(apiUrl);
   const data = await response.json();
-  setCustomer(data.user);
+  setCustomer(data);
   console.log(data);
   }
 
+  const Locationcard = ({locid}) => {
+
+    const [Location, setLocation] = useState([]);
+
+    useEffect(() => {
+      loadlocData();
+    }, []);
+  
+    const loadlocData = async () => {
+    const response = await fetch(window.apiurl + 'api/markets/deliverylocations/' + locid + '/');
+    const data = await response.json();
+    setLocation(data);
+    console.log(data);
+    }
+
+    if (Location.len == 0){
+      return (
+        <View style={{marginTop: 40}}>
+        <Text style={{fontSize: 27, fontWeight: 'bold', color: COLORS.dark}}>
+          สถานที่จัดส่ง
+        </Text>
+      </View>
+      )
+    }
+
+    return (
+      <View style={{marginTop: 20}}>
+          <View style={STYLES.inputContainer}>
+              <Text style={STYLES.input}>จัดส่งที่: {Location.name}</Text> 
+          </View>
+        </View>
+
+    );
+
+  }
+
+  if (Customer.length == 0){
+    return (
+       null
+    )
+  }
 
   return (
+    
     <SafeAreaView
       style={{paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white}}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -50,31 +94,43 @@ const ProfileScreen = ({ navigation }) => {
 
         <View style={{marginTop: 20}}>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>ชื่อบัญชี: {Customer.username}</Text> 
+              <Text style={STYLES.input}>ชื่อบัญชี: {Customer.user.username}</Text> 
           </View>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>ชื่อจริง: {Customer.first_name}</Text> 
+              <Text style={STYLES.input}>ชื่อจริง: {Customer.user.first_name}</Text> 
           </View>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>นามสกุล: {Customer.last_name}</Text> 
+              <Text style={STYLES.input}>นามสกุล: {Customer.user.last_name}</Text> 
           </View>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>อีเมล:  {Customer.email}</Text>
+              <Text style={STYLES.input}>อีเมล:  {Customer.user.email}</Text>
           </View>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>เบอร์โทรศัพท์:  {Customer.phone}</Text>
+              <Text style={STYLES.input}>เบอร์โทรศัพท์:  {Customer.user.phone}</Text>
           </View>
+
+          <View style={{marginTop: 40}}>
+          <Text style={{fontSize: 27, fontWeight: 'bold', color: COLORS.dark}}>
+            สถานที่จัดส่ง
+          </Text>
+          </View>
+          <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={1}
+          data={Customer.delverylocation}
+          renderItem={({item}) => <Locationcard locid={item.location} />}
+          />
           
           <View style={{marginHorizontal: 30 , marginVertical:50}}>
           <TouchableOpacity>
-              <PrimaryButton title="แก้ไขข้อมูล" onPress={() => {navigation.navigate('Edit', {username: Customer.username, email: Customer.email, phone: Customer.phone, fname: Customer.first_name, lname: Customer.last_name})}}/>
+              <PrimaryButton title="แก้ไขข้อมูล" onPress={() => {navigation.navigate('Edit', {username: Customer.user.username, email: Customer.user.email, phone: Customer.user.phone, fname: Customer.user.first_name, lname: Customer.user.last_name})}}/>
           </TouchableOpacity>
 
           <View style={{marginBottom:20}}></View>
 
           <TouchableOpacity>
               <PrimaryButton title="ออกจากระบบ"
-              onPress={() => navigation.navigate('OnBoard')}/>
+              onPress={() => {navigation.navigate('OnBoard'), AsyncStorage.clear()}}/>
           </TouchableOpacity>
           </View>
           <View

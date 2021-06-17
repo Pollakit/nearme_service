@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import {PrimaryButton} from '../components/Button';
 import {DeleteButton} from '../components/Button';
 import {MiniButton} from '../components/Button';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
 const cardWidth = width - 20;               //card width constant when we have 2 cards per row
@@ -15,9 +17,11 @@ const MenuScreen = ({navigation}) => {
 
   const CategoryapiUrl = window.apiurl + 'api/shops/menucategories/customer/shop/' + navigation.getParam('shopid') + '/';
 
+  var CartArray = []
   const [Category, setCategory] = useState([]);
-  const [Cart, setCart] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [ isPress, setIsPress ] = useState(false);
+
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -36,12 +40,17 @@ const MenuScreen = ({navigation}) => {
     console.log(data);
   }
 
+  const storeproductData = async() => {
+       AsyncStorage.setItem('products', JSON.stringify((CartArray)));
+  };
+
   const Card = ({menus}) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => {console.log(menus)}}>
+        onPress={() => {CartArray.push({product:menus.id, name:menus.name, image:menus.main_image, price:menus.price, amount:1}), console.log("Array " + CartArray), storeproductData()
+      }}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
             <Image source={{uri:menus.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
@@ -94,7 +103,6 @@ const MenuScreen = ({navigation}) => {
     );
   };
 
-
   return (
     <View style={{flex: 1, backgroundColor: COLORS.white}}>
       <View style={style.header}>
@@ -125,6 +133,9 @@ const MenuScreen = ({navigation}) => {
         renderItem={({item}) => <Categoryhead categories={item} />}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
+      <TouchableOpacity>
+        <PrimaryButton title="ถัดไป" onPress={() => {navigation.navigate('Cart');}}/>
+      </TouchableOpacity>
       
     </View>
   );

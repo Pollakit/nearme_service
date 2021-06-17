@@ -32,11 +32,6 @@ const OnBoardScreen = ({navigation}) => {
             หาร้านอาหารใกล้ตัวคุณได้ที่เรา
           </Text>
         </View>
-        <View style={style.indicatorContainer}>
-          <View style={style.currentIndicator} />
-          <View style={style.indicator} />
-          <View style={style.indicator} />
-        </View>
         <PrimaryButton
           onPress={() => navigation.navigate('Sign')}
           title="สมัครเข้าใช้"
