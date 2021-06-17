@@ -27,7 +27,7 @@ class CustomerList(generics.ListCreateAPIView):
     serializer_class = RoughCustomerSerializer
 
 
-class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
+class CustomerDetail(generics.RetrieveUpdateAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 

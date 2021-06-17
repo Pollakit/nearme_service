@@ -40,7 +40,7 @@ urlpatterns = [
     # path('api/dj-rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
     #         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
-    path('docs/', include_docs_urls(title='My API title')),
+    path('docs/', include_docs_urls(title='Nearme API endpoints')),
 
     path('api/accounts/', include('accounts.urls')),
     path('api/markets/', include('markets.urls')),

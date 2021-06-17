@@ -23,16 +23,17 @@ urlpatterns = [
     # path('users/', UserList.as_view()),
     # path('users/<int:pk>/', UserDetail.as_view()),
 
-    path('customers/', CustomerList.as_view()),
-    path('customers/<int:pk>/', CustomerDetail.as_view()),
-    path('customers/user/<int:pk>/', UserViewCustomerDetail.as_view()),
+    path('customers/', CustomerList.as_view()),  # GET POST
+    path('customers/<int:pk>/', CustomerDetail.as_view()),  # GET PATCH
+    path('customers/user/<int:pk>/', UserViewCustomerDetail.as_view()),  # GET
 
-    path('shopowners/', ShopOwnerList.as_view()),
-    path('shopowners/<int:pk>/', ShopOwnerDetail.as_view()),
-    path('shopowners/user/<int:pk>/', UserViewShopOwnerDetail.as_view()),
+    path('shopowners/', ShopOwnerList.as_view()),  # GET POST
+    path('shopowners/<int:pk>/', ShopOwnerDetail.as_view()),  # GET PATCH
+    path('shopowners/user/<int:pk>/', UserViewShopOwnerDetail.as_view()),  # GET
 
-    path('marketadmins/', MarketAdminList.as_view()),
-    path('marketadmins/<int:pk>/', MarketAdminDetail.as_view()),
-    path('marketadmins/user/<int:pk>/', UserViewMarketAdminDetail.as_view()),
+    path('marketadmins/', MarketAdminList.as_view()),  # GET
+    path('marketadmins/<int:pk>/', MarketAdminDetail.as_view()),  # GET
+    path('marketadmins/user/<int:pk>/',
+         UserViewMarketAdminDetail.as_view()),  # GET
 
 ]

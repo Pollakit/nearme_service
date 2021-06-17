@@ -11,31 +11,36 @@ from .views import (MarketChainList, MarketChainSearch, MarketChainDetail,
 #                     DeliveryLocationListByMarketChain, DeliveryLocationDetail
 
 urlpatterns = [
-    path('marketchains/', MarketChainList.as_view()),
-    path('marketchains/search/', MarketChainSearch.as_view()),
-    path('marketchains/<int:pk>/', MarketChainDetail.as_view()),
-    path('openclosemarketchain/<int:pk>/', OpenCloseMarketChain.as_view()),
+    path('marketchains/', MarketChainList.as_view()),                      # GET
+    path('marketchains/search/', MarketChainSearch.as_view()),             # GET
+    path('marketchains/<int:pk>/', MarketChainDetail.as_view()),           # GET
+    path('openclosemarketchain/<int:pk>/',
+         OpenCloseMarketChain.as_view()),                                  # GET PATCH
 
+
+    # GET POST
     path('markets/', MarketList.as_view()),
-    #     path('markets/moreImage', MarketImageView.as_view()),
-    path('markets/search/', MarketSearch.as_view()),
-    #     path('market/<int:market_id>/moreImage/<int:image_id>', MarketImageView.as_view()),
+    path('markets/search/', MarketSearch.as_view()),                       # GET
     path('markets/deliveryLocation/<int:pk>/',
-         MarketListByDeliveryLocation.as_view()),
-    path('markets/marketchain/<int:pk>/', MarketListByMarketChain.as_view()),
-    path('markets/<int:pk>/', MarketDetail.as_view()),
-    path('openclosemarket/<int:pk>/', OpenCloseMarket.as_view()),
+         MarketListByDeliveryLocation.as_view()),                          # GET
+    path('markets/marketchain/<int:pk>/',
+         MarketListByMarketChain.as_view()),  # GET
+    path('markets/<int:pk>/', MarketDetail.as_view()
+         ),                     # GET PATCH DELETE
+    path('openclosemarket/<int:pk>/',
+         OpenCloseMarket.as_view()),          # GET PATCH
 
 
-    path('favoriteLocation/', FavouriteLocationList.as_view()),
+    path('favoriteLocation/', FavouriteLocationList.as_view()),            # GET POST
     path('favoriteLocation/<int:pk>/',
-         FavouriteLocationDetail.as_view()),
+         FavouriteLocationDetail.as_view()),                               # GET PATCH DELETE
 
     path('favoriteLocation/customer/<int:pk>/',
-         CustomerFavouriteLocationDetail.as_view()),
+         CustomerFavouriteLocationDetail.as_view()),                       # GET
 
-    path('deliverylocations/', DeliveryLocationList.as_view()),
+    path('deliverylocations/', DeliveryLocationList.as_view()),            # GET
     path('deliverylocations/marketchain/<int:pk>/',
-         DeliveryLocationListByMarketChain.as_view()),
-    path('deliverylocations/<int:pk>/', DeliveryLocationDetail.as_view()),
+         DeliveryLocationListByMarketChain.as_view()),                     # GET
+    path('deliverylocations/<int:pk>/',
+         DeliveryLocationDetail.as_view()),  # GET PATCH DELETE
 ]
