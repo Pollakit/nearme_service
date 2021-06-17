@@ -1,7 +1,6 @@
 import React from 'react';
 import {Dimensions, SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight,
   TouchableOpacity, FlatList, RefreshControl} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import { useState, useEffect } from "react";
@@ -20,7 +19,7 @@ const MenuScreen = ({navigation}) => {
   const [Cart, setCart] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(async () => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     loadCategoryData();
     setRefreshing(false)

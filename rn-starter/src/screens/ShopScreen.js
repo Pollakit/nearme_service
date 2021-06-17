@@ -18,7 +18,7 @@ const ShopScreen = ({navigation}) => {
   const [Search, setSearch] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(async () => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     ShopsloadData();
     setRefreshing(false)
@@ -29,7 +29,7 @@ const ShopScreen = ({navigation}) => {
     ShopsloadData();
   }, [Search]);
 
- const c = async () => {
+ const ShopsloadData = async () => {
    if (Search.length == 0) {
     const response = await fetch(window.apiurl + 'api/shops/shops/market/' + navigation.getParam('canteenid') + '/');
     const data = await response.json();

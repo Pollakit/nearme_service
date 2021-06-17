@@ -1,16 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ScrollView,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
-  RefreshControl} from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View, FlatList, ScrollView, TextInput, TouchableHighlight, TouchableOpacity, RefreshControl} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import { useState, useEffect } from "react";
@@ -18,23 +7,16 @@ import { useState, useEffect } from "react";
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
 const cardWidth = width - 20;               //card width constant when we have 2 cards per row
 
-//const TestAPI = 'http://cold-squid-62.loca.lt/media/images/shopOwner/kekw.jpg';
-//const TestAPI2 = 'http://cold-squid-62.loca.lt/';
-//const TestAPI3 = 'media/images/shopOwner/kekw.jpg';
-
-
 const FavoriteScreen = ({navigation}) => {
 
   const [Favshops, setFavshops] = useState([]);
   const [dummy, reload] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(async () => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    setTimeout(()=>{
-      FavShopsloadData();
-     }, 1000)
-      setRefreshing(false)
+    FavShopsloadData();
+    setRefreshing(false)
   }, [refreshing]);
 
   useEffect(() => {

@@ -19,7 +19,7 @@ const CanteenScreen = ({navigation}) => {
   const [Search, setSearch] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(async () => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     loadData();
     setRefreshing(false)
