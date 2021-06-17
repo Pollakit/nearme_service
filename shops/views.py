@@ -182,7 +182,7 @@ class DecoratorList(generics.ListCreateAPIView):
     serializer_class = DecoratorSerializer
 
 
-class DecoratorListByShop(generics.ListCreateAPIView):
+class DecoratorListByShop(generics.ListAPIView):
     serializer_class = DecoratorSerializer
 
     def get_queryset(self):
@@ -190,7 +190,7 @@ class DecoratorListByShop(generics.ListCreateAPIView):
         return Decorator.objects.filter(shop__id=shopID)
 
 
-class DecoratorListByProduct(generics.ListCreateAPIView):
+class DecoratorListByProduct(generics.ListAPIView):
     # permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = DecoratorSerializer
 
