@@ -49,7 +49,7 @@ const MenuScreen = ({navigation}) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => {CartArray.push({product:menus.id, name:menus.name, image:menus.main_image, price:menus.price, amount:1}), console.log("Array " + CartArray), storeproductData()
+        onPress={() => {CartArray.push({product:menus.id, name:menus.name, image:menus.main_image, price:menus.price, quantity:1}), console.log("Array " + CartArray), storeproductData()
       }}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
