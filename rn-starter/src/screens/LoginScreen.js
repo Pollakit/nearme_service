@@ -5,7 +5,7 @@ import COLORS from '../consts/colors';
 import STYLES from '../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {PrimaryButton} from '../components/Button';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-community/async-storage'
 
 const LoginScreen = ({navigation}) => {
@@ -13,18 +13,11 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const handleResponse = res => {
-    if(res.ok) {
-      navigation.navigate('Canteen')
-    }
-    throw new Error('Network response was not ok.')
-  }
-
-  const apicall = (username, password) => {
+  const apicall = async() => {
 
     const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/login/';
 
-    fetch(apiUrl, { 
+    const response = await fetch(apiUrl, { 
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -36,9 +29,30 @@ const LoginScreen = ({navigation}) => {
           password: password,
         }
       )
-    }).then(handleResponse)
-    .then(data => console.log(data))
-    .catch(error => console.log("Error detected: " + error)) 
+    })
+
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+      console.log(data.user.pk)
+      getcus(data.user.pk)
+      //AsyncStorage.setItem('cusid', JSON.stringify((data.id)))
+      //navigation.navigate('Canteen')
+    } else {
+      
+    }
+  }
+
+  const getcus = async (userid) => {
+    const response = await fetch(window.apiurl + 'api/accounts/customers/user/'+ userid + '/');
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      AsyncStorage.setItem('cusid', JSON.stringify((data[0].id)))
+      navigation.navigate('Canteen')
+    } else {
+      
+    }
   }
 
   
@@ -99,7 +113,7 @@ const LoginScreen = ({navigation}) => {
                   } 
                   else {
                     //{navigation.navigate('Canteen');};
-                    {apicall(username, password)};
+                    {apicall()};
                   }
                 }}
                 title="เข้าสู่ระบบ"/>

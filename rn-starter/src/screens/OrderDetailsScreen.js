@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image, FlatList} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
@@ -9,22 +9,63 @@ import { useState, useEffect } from "react";
 
 const OrderDetailsScreen = ({navigation}) => {
 
-  const apiUrl = window.apiurl + 'api/orders/orders/'+ 1 + '/';
+  const apiUrl = window.apiurl + 'api/orders/orders/'+ navigation.getParam('orderid') + '/';
 
   const [Orderdetail, setOrderdetail] = useState([]);
+  const [ProductID, setProductID] = useState([]);
+  const [LocationDetail, setLocationDetail] = useState([]);
 
   useEffect(() => {
     loadData();
+    loadLoc();
   }, []);
+
 
   const loadData = async () => {
       const response = await fetch(apiUrl);
       const data = await response.json();
       setOrderdetail(data);
       console.log(data);
+      setProductID(data.products);
+      console.log(data.products);
   }
 
+  const loadLoc = async () => {
+    const response = await fetch(window.apiurl + 'api/markets/deliverylocations/' + navigation.getParam('locid') + '/');
+    const data = await response.json();
+    setLocationDetail(data);
+    console.log(data);
+}
 
+const ProductCard = ({item}) => {
+
+  const [Product, setProduct] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+      const response = await fetch(window.apiurl + 'api/shops/products/'+ item.product + '/');
+      const data = await response.json();
+      setProduct(data);
+      console.log(data);
+  }
+
+  return (
+    <View>
+          <Text style={style.detailsText}>
+            {Product.name}:<Text>{' '}</Text>{item.quantity} กล่อง
+          </Text>
+    </View>
+  );
+};
+
+
+  if (Orderdetail.len == 0 && LocationDetail.len == 0) {
+    return null
+  }
+  
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white}}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -48,26 +89,29 @@ const OrderDetailsScreen = ({navigation}) => {
             </Text>
           </View>
           <Text style={style.detailsText}>
-            ชื่อร้าน:<Text>{' '}</Text>ป้าตามสั่ง โรงพระเทพ
+            ชื่อร้าน:<Text>{' '}</Text>{navigation.getParam('shopname')}
           </Text>
           <Text style={style.detailsText}>
-            เบอร์โทรศัพท์ร้าน:<Text>{' '}</Text>087-124-2556
+            เบอร์โทรศัพท์ร้าน:<Text>{' '}</Text>{Orderdetail.deliverPhone}
           </Text>
           <Text style={style.detailsText}>
-            สถานที่จัดส่ง:<Text>{' '}</Text>ตึก ECC ชั้น 6 ห้อง 603
+            สถานที่จัดส่ง:<Text>{' '}</Text>{LocationDetail.name}
           </Text>
           <Text style={style.detailsText}>
-            สั่งเมื่อ:<Text>{' '}</Text> วันที่ 12/03/2021, 12:15 นาฬิกา
+            สั่งเมื่อ:<Text>{' '}</Text> วันที่ {navigation.getParam('date')[0]}, {navigation.getParam('time')[0]} : {navigation.getParam('time')[1]} นาฬิกา
           </Text>
           <Text
               style={{fontSize: 25, fontWeight: 'bold', color: COLORS.white, marginTop:20}}>
               รายการที่สั่ง
           </Text>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            //contentContainerStyle={{paddingBottom: 200}}
+            data={ProductID}
+            renderItem={({item}) => <ProductCard item={item} />}
+          />
           <Text style={style.detailsText}>
-            ผัดไทย:<Text>{' '}</Text>3 กล่อง
-          </Text>
-          <Text style={style.detailsText}>
-            ราคารวม:<Text>{' '}</Text>150 บาท
+            ราคารวม:<Text>{' '}</Text>{Orderdetail.totalPrice} บาท
           </Text>
           <View style={{flexDirection: 'row', marginTop: 100, marginBottom: 300, marginLeft: 100}}>
             <SecondaryButton title="  ยืนยันการรับสินค้า  " onPress={() => navigation.navigate('List')}/>

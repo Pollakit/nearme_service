@@ -21,6 +21,7 @@ const ProfileScreen = ({ navigation }) => {
   useEffect(() => {
     loadData();
   }, []);
+  
 
   const loadData = async () => {
   const response = await fetch(apiUrl);
@@ -28,6 +29,18 @@ const ProfileScreen = ({ navigation }) => {
   setCustomer(data);
   console.log(data);
   }
+
+  /*
+  const loadData = async () => {
+    const value = await AsyncStorage.getItem('cusid');
+    // We have data!!
+    console.log(value);
+    const response = await fetch('https://nearme-kmitl.herokuapp.com/api/accounts/customers/' + JSON.parse(value) + '/');
+    const data = await response.json();
+    setCustomer(data);
+    console.log(data);
+    }
+  */
 
   const Locationcard = ({locid}) => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image,TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import COLORS from '../consts/colors';
 import {PrimaryButton} from '../components/Button';
@@ -43,6 +43,13 @@ const OnBoardScreen = ({navigation}) => {
           onPress={() => navigation.navigate('Login')}
           title="ลงชื่อเข้าใช้"
         />
+
+        <TouchableOpacity onPress={() => {navigation.navigate('Canteen');}}>
+            <Text style={{color: COLORS.primary, fontWeight: 'bold', textAlign: 'center', fontSize: 18,}}>
+              เข้ามาค้นหาร้านที่คุณต้องการเลย!
+            </Text>
+        </TouchableOpacity>
+
       </View>
     </SafeAreaView>
   );

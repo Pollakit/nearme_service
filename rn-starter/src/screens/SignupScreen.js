@@ -165,8 +165,78 @@ import COLORS from '../consts/colors';
 import STYLES from '../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {PrimaryButton} from '../components/Button';
+import { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 const SignupScreen = ({navigation}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
+  
+  const apicall = async() => {
+
+    const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/registration/';
+
+    const response = await fetch(apiUrl, { 
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          username: username,
+          email: email,
+          password1: password,
+          password2: cpassword,
+          phone: phone,
+          first_name: fname,
+          last_name: lname,
+          type: 'CUSTOMER'
+        }
+      )
+    })
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+      console.log(data.user.pk)
+      regcus(data.user.pk)
+      //AsyncStorage.setItem('cusid', JSON.stringify((data.id)))
+      //navigation.navigate('Canteen')
+    } else {
+      
+    }
+  }
+
+  const regcus = async (userid) => {
+    const response = await fetch(window.apiurl + 'api/accounts/customers/', { 
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          user: userid,
+        }
+      )
+    })
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      AsyncStorage.setItem('cusid', JSON.stringify((data.id)))
+      navigation.navigate('Canteen')
+    } else {
+      
+    }
+  }
+
+
   return (
     <View
       style={{paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white}}>
@@ -199,9 +269,22 @@ const SignupScreen = ({navigation}) => {
               style={STYLES.inputIcon}
             />
             <TextInput
+              placeholder="ชื่อบัญชี"
+              style={STYLES.input}
+              onChangeText={(username) => setUsername(username)}
+            />
+        </View>
+        <View style={STYLES.inputContainer}>
+            <Icon
+              name="person"
+              color={COLORS.dark}
+              size={20}
+              style={STYLES.inputIcon}
+            />
+            <TextInput
               placeholder="ชื่อจริง"
               style={STYLES.input}
-              secureTextEntry
+              onChangeText={(fname) => setFname(fname)}
             />
           </View>
           <View style={STYLES.inputContainer}>
@@ -214,7 +297,7 @@ const SignupScreen = ({navigation}) => {
             <TextInput
               placeholder="นามสกุล"
               style={STYLES.input}
-              secureTextEntry
+              onChangeText={(lname) => setLname(lname)}
             />
           </View>
           <View style={STYLES.inputContainer}>
@@ -224,7 +307,21 @@ const SignupScreen = ({navigation}) => {
               size={20}
               style={STYLES.inputIcon}
             />
-            <TextInput placeholder="อีเมล" style={STYLES.input} />
+            <TextInput placeholder="อีเมล" style={STYLES.input} 
+            onChangeText={(email) => setEmail(email)}/>
+          </View>
+          <View style={STYLES.inputContainer}>
+            <Icon
+              name="person"
+              color={COLORS.dark}
+              size={20}
+              style={STYLES.inputIcon}
+            />
+            <TextInput
+              placeholder="เบอร์โทรศัพท์"
+              style={STYLES.input}
+              onChangeText={(phone) => setPhone(phone)}
+            />
           </View>
           <View style={STYLES.inputContainer}>
             <Icon
@@ -237,6 +334,7 @@ const SignupScreen = ({navigation}) => {
               placeholder="รหัสผ่าน"
               style={STYLES.input}
               secureTextEntry
+              onChangeText={(password) => setPassword(password)}
             />
           </View>
           <View style={STYLES.inputContainer}>
@@ -250,13 +348,14 @@ const SignupScreen = ({navigation}) => {
               placeholder="ยืนยันรหัสผ่าน"
               style={STYLES.input}
               secureTextEntry
+              onChangeText={(cpassword) => setCpassword(cpassword)}
             />
           </View>
           
           <TouchableOpacity>
           <View style={{marginHorizontal: 30 , marginVertical:50}}>
               <PrimaryButton title="สมัครบัญชี" 
-              onPress={() => navigation.navigate('Canteen')}/>
+              onPress={() => apicall()}/>
             </View>
           </TouchableOpacity>
           <View
@@ -287,8 +386,8 @@ const SignupScreen = ({navigation}) => {
           <Text style={{color: COLORS.dark, fontWeight: 'bold'}}>
             มีบัญชีอยู่แล้ว?
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={{color: COLORS.primary, fontWeight: 'bold'}}>
+          <TouchableOpacity>
+            <Text style={{color: COLORS.primary, fontWeight: 'bold'}} onPress={() => navigation.navigate('Login')}>
               เข้าสู่ระบบเลย!
             </Text>
           </TouchableOpacity>

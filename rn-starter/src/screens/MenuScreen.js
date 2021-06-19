@@ -20,7 +20,6 @@ const MenuScreen = ({navigation}) => {
   var CartArray = []
   const [Category, setCategory] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [ isPress, setIsPress ] = useState(false);
 
 
   const onRefresh = React.useCallback(async () => {

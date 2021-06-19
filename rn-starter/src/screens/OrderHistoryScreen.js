@@ -25,7 +25,27 @@ const OrderHistoryScreen = ({navigation}) => {
       console.log(data);
   }
 
-  const CartCard = ({item}) => {
+  const OrderCard = ({item}) => {
+
+    const Time = item.created_at
+    const Date = Time.split('T');
+    const hour = Date[1].split(':');
+    console.log(Date[0],hour[0] + ':' + hour[1])
+
+
+    const [Shop, setShop] = useState([]);
+
+    useEffect(() => {
+      loadData();
+    }, []);
+  
+    const loadData = async () => {
+        const response = await fetch(window.apiurl + 'api/shops/shops/'+ item.shop + '/');
+        const data = await response.json();
+        setShop(data);
+        console.log(data);
+    }
+
     return (
       <View style={style.cartCard}>
         <View
@@ -35,26 +55,28 @@ const OrderHistoryScreen = ({navigation}) => {
             paddingVertical: 20,
             flex: 1,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>สั่งเมื่อ<Text>{' '}</Text>{item.time}<Text>{' '}</Text>นาฬิกา</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16}}>สั่งเมื่อ<Text>{' '}</Text>{hour[0] + ':' + hour[1]}<Text>{' '}</Text>นาฬิกา</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16}}>วันที่<Text>{' '}</Text>{Date[0]}<Text>{' '}</Text></Text>
           <Text style={{fontSize: 13, color: COLORS.primary}}>
-            ร้าน<Text>{' '}</Text>{item.from}
+            ร้าน<Text>{' '}</Text>{Shop.name}
           </Text>
-          <Text style={{fontSize: 17, fontWeight: 'bold'}}>ราคารวม<Text>{' '}</Text>{item.totalprice}<Text>{' '}</Text>บาท</Text>
+          <Text style={{fontSize: 17, fontWeight: 'bold'}}>ราคารวม<Text>{' '}</Text>{item.totalPrice}<Text>{' '}</Text>บาท</Text>
         </View>
         <View style={{marginRight: 20, alignItems: 'center'}}>
-          <Text style={{marginBottom:10, marginTop: 5, fontWeight: 'bold', fontSize: 16, color: COLORS.maroon}}>{item.status}</Text>
-          <MiniButton title="  ดูรายละเอียด  " onPress={() => {navigation.navigate('Order', {orderid: Order.id})}}/>
+          <Text style={{marginBottom:10, marginTop: 5, fontWeight: 'bold', fontSize: 16, color: COLORS.maroon}}>{item.state}</Text>
+          <MiniButton title="  ดูรายละเอียด  " onPress={() => {navigation.navigate('Order', {orderid: item.id, shopname: Shop.name, locid: item.deliveryLocation, date: Date, time: hour})}}/>
         </View>
       </View>
     );
   };
+
   return (
     <View style={{backgroundColor: COLORS.white, flex: 1}}>
       <FlatList
         showsVerticalScrollIndicator={false}
         //contentContainerStyle={{paddingBottom: 200}}
-        data={orderHistory}
-        renderItem={({item}) => <CartCard item={item} />}
+        data={Order}
+        renderItem={({item}) => <OrderCard item={item} />}
       />
     </View>
   );

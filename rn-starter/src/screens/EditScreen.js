@@ -12,13 +12,51 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 const ProfileScreen = ({ navigation }) => {
 
-  const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/dj-rest-auth/login/';
+  const [initialname, setinitialname] = useState(navigation.getParam('username'));
+  const [fname, setFname] = useState(navigation.getParam('fname'));
+  const [lname, setLname] = useState(navigation.getParam('lname'));
+  const [username, setUsername] = useState(navigation.getParam('username'));
+  const [phone, setPhone] = useState(navigation.getParam('phone'));
 
-  const [email, setEmail] = useState([]);
-  const [fname, setFname] = useState([]);
-  const [lname, setLname] = useState([]);
-  const [username, setUsername] = useState([]);
-  const [phone, setPhone] = useState([]);
+  const handleResponse = res => {
+    if(res.ok) {
+      navigation.navigate('profile')
+    }
+    throw new Error('Network response was not ok.')
+  }
+
+  const apicall = async() => {
+
+    const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/accounts/customers/1/';
+
+    const response = await fetch(apiUrl, { 
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(
+        {user:
+        {
+          username: username,
+          phone: phone,
+          first_name: fname,
+          last_name: lname,
+          type: 'CUSTOMER'
+        }
+        }
+      )
+    })
+
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+      navigation.navigate('Profile')
+    } else {
+      
+    }
+  }
 
   return (
     <SafeAreaView
@@ -53,14 +91,14 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={STYLES.input}>ชื่อจริง: <TextInput style={styles.text}
                                                             defaultValue= {navigation.getParam('fname')}
                                                             placeholderTextColor="#003f5c"
-                                                            onChangeText={(username) => setUsername(username)}/></Text> 
+                                                            onChangeText={(fname) => setFname(fname)}/></Text> 
           </View>
 
           <View style={STYLES.inputContainer}>
               <Text style={STYLES.input}>นามสกุล: <TextInput style={styles.text}
                                                             defaultValue= {navigation.getParam('lname')}
                                                             placeholderTextColor="#003f5c"
-                                                            onChangeText={(username) => setUsername(username)}/></Text> 
+                                                            onChangeText={(lname) => setLname(lname)}/></Text> 
           </View>
 
           <View style={STYLES.inputContainer}>
@@ -70,12 +108,19 @@ const ProfileScreen = ({ navigation }) => {
               <Text style={STYLES.input}>เบอร์โทรศัพท์: <TextInput style={styles.text}
                                                             defaultValue= {navigation.getParam('phone')}
                                                             placeholderTextColor="#003f5c"
-                                                             onChangeText={(phone) => setPhone(phone)}/></Text>
+                                                            onChangeText={(phone) => setPhone(phone)}/></Text>
           </View>
           
           <View style={{marginHorizontal: 30 , marginVertical:50}}>
           <TouchableOpacity>
-              <PrimaryButton title="บันทึกการเปลี่ยนแปลง"/>
+              <PrimaryButton title="บันทึกการเปลี่ยนแปลง" onPress={() => {
+                  if (fname.trim() === "" || lname.trim() === ""|| username.trim() === "" || phone.trim() === "") {
+                  } 
+                  else {
+                    //{navigation.navigate('Canteen');};
+                    {apicall()};
+                  }
+                }}/>
           </TouchableOpacity>
 
           <View style={{marginBottom:20}}></View>

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 //import TabNavigator from '../navigations/BottomNavigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 
 
@@ -12,6 +14,18 @@ const cardWidth = width - 20;               //card width constant when we have 2
 
 
 const CanteenScreen = ({navigation}) => {
+
+  useEffect(() => {
+    retrieveID();
+  }, []);
+
+  const retrieveID = async () => {
+      const value = await AsyncStorage.getItem('cusid');
+        // We have data!!
+        console.log(value);
+        console.log(JSON.parse(value));
+
+  };
 
   const apiUrl = window.apiurl + 'api/markets/markets/marketchain/1/';
 
@@ -56,7 +70,6 @@ const CanteenScreen = ({navigation}) => {
         <View style={{marginHorizontal: 20, marginVertical: -80}}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>{canteen.name}</Text>
           <Text style={{fontSize: 16, color: COLORS.grey, marginTop: 2}}>
-            ตึกพระเทพ
           </Text>
         </View>
       </View>
@@ -98,7 +111,7 @@ const CanteenScreen = ({navigation}) => {
           <Icon name="search" size={28} />
           <TextInput
             style={{flex: 1, fontSize: 18}}
-            placeholder="ค้นหาร้านอาหาร"
+            placeholder="ค้นหาโรงอาหาร"
             onChangeText={(Search) => setSearch(Search)}
           />
         </View>
