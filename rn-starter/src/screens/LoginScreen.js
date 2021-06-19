@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, Text, TextInput, Image, TouchableOpacity} from 'react-native';
+import {Alert, SafeAreaView, View, Text, TextInput, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import STYLES from '../styles/styles';
@@ -12,6 +12,30 @@ const LoginScreen = ({navigation}) => {
 
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const successAlertHandler = () => {
+    //function to make simple alert
+    Alert.alert(
+      'Login Success',
+      'Welcome to NearMe', // <- this part is optional, you can pass an empty string
+      [
+        {text: 'OK', onPress: () => navigation.navigate('Canteen')},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const emptyAlertHandler = () => {
+    //function to make simple alert
+      Alert.alert(
+      'Login Unsuccess',
+      'Please fill up all information', // <- this part is optional, you can pass an empty string
+      [
+        {text: 'OK'},
+      ],
+      {cancelable: false},
+    );
+  };
 
   const apicall = async() => {
 
@@ -49,7 +73,7 @@ const LoginScreen = ({navigation}) => {
     console.log(data);
     if (response.ok) {
       AsyncStorage.setItem('cusid', JSON.stringify((data[0].id)))
-      navigation.navigate('Canteen')
+      successAlertHandler()
     } else {
       
     }
@@ -110,6 +134,7 @@ const LoginScreen = ({navigation}) => {
               <PrimaryButton 
                 onPress={() => {
                   if (password.trim() === "" || username.trim() === "") {
+                    emptyAlertHandler()
                   } 
                   else {
                     //{navigation.navigate('Canteen');};

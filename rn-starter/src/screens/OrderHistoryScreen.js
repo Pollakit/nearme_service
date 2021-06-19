@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, FlatList} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image, FlatList, RefreshControl} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useState, useEffect } from "react";
 import COLORS from '../consts/colors';
@@ -7,19 +7,31 @@ import {PrimaryButton} from '../components/Button';
 import {MiniButton} from '../components/Button';
 import {SecondaryButton} from '../components/Button';
 import orderHistory from '../consts/orderHistory';
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 const OrderHistoryScreen = ({navigation}) => {
 
   const apiUrl = window.apiurl + 'api/orders/orders/customer/1/';
 
   const [Order, setOrder] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    loadData();
+    setRefreshing(false)
+  }, [refreshing]);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
-      const response = await fetch(apiUrl);
+      const value = await AsyncStorage.getItem('cusid');
+      // We have data!!
+      console.log(value);
+      const response = await fetch(window.apiurl + 'api/orders/orders/customer/' + JSON.parse(value) + '/');
       const data = await response.json();
       setOrder(data);
       console.log(data);
@@ -77,6 +89,7 @@ const OrderHistoryScreen = ({navigation}) => {
         //contentContainerStyle={{paddingBottom: 200}}
         data={Order}
         renderItem={({item}) => <OrderCard item={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </View>
   );

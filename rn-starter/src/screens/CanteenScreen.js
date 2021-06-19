@@ -188,7 +188,7 @@ const style = StyleSheet.create({
     marginTop: 10,
     borderRadius: 15,
     elevation: 13,
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.white,
   },
   inputContainer: {
     flex: 1,

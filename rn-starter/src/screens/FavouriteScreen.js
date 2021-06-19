@@ -3,6 +3,8 @@ import { Dimensions, Image, StyleSheet, Text, View, FlatList, ScrollView, TextIn
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
 import { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-community/async-storage'
+
 
 const {width} = Dimensions.get('screen');   //get size of current screen to calculate card width 
 const cardWidth = width - 20;               //card width constant when we have 2 cards per row
@@ -26,7 +28,10 @@ const FavoriteScreen = ({navigation}) => {
   }, [dummy]);
 
  const FavShopsloadData = async () => {
-    const response = await fetch(window.apiurl + 'api/shops/favouriteShop/customer/1/');
+    const value = await AsyncStorage.getItem('cusid');
+    // We have data!!
+    console.log(value);
+    const response = await fetch(window.apiurl + 'api/shops/favouriteShop/customer/' + JSON.parse(value) + '/');
     const data = await response.json();
     setFavshops(data);
     console.log(data);
@@ -59,7 +64,7 @@ const FavoriteScreen = ({navigation}) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate(('Menu'), {shopid: Shops.id, shopname: Shops.name})}>
+        onPress={() => {navigation.navigate(('Menu'), {shopid: Shops.id, shopname: Shops.name}), AsyncStorage.setItem('shopid', JSON.stringify(Shops.id))}}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
             <Image source={{uri:Shops.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
@@ -138,7 +143,7 @@ const style = StyleSheet.create({
     marginTop: 10,
     borderRadius: 15,
     elevation: 13,
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.white,
   },
   inputContainer: {
     flex: 1,

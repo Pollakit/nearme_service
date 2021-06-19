@@ -22,15 +22,16 @@ const ProfileScreen = ({ navigation }) => {
     loadData();
   }, []);
   
-
+  /*
   const loadData = async () => {
   const response = await fetch(apiUrl);
   const data = await response.json();
   setCustomer(data);
   console.log(data);
   }
+  */
 
-  /*
+
   const loadData = async () => {
     const value = await AsyncStorage.getItem('cusid');
     // We have data!!
@@ -40,7 +41,7 @@ const ProfileScreen = ({ navigation }) => {
     setCustomer(data);
     console.log(data);
     }
-  */
+
 
   const Locationcard = ({locid}) => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, TouchableHighlight, TextInput} from 'react-native';
+import {Alert,SafeAreaView, StyleSheet, View, Text, Image, TouchableHighlight, TextInput} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
@@ -12,7 +12,20 @@ import AsyncStorage from '@react-native-community/async-storage'
 const CartScreen = ({navigation}) => {
 
   const [Products, setProducts] = useState([]);
+  const [Shopid, setShopid] = useState([]);
   const [totalItemCount, setTotalItemCount] = useState(0);
+
+  const SuccessAlertHandler = () => {
+    //function to make simple alert
+    Alert.alert(
+      'Order complete',
+      'Thankyou for using our service, please wait for your meal', // <- this part is optional, you can pass an empty string
+      [
+        {text: 'OK', onPress: () => navigation.navigate('Canteen')},
+      ],
+      {cancelable: false},
+    );
+  };
 
   const handleQuantityIncrease = (index) => {
     const newProducts = [...Products];
@@ -45,19 +58,77 @@ const calculateTotal = () => {
   }, []);
 
   const retrieveData = async () => {
-    try {
       const value = await AsyncStorage.getItem('shopid');
       const value2 = await AsyncStorage.getItem('products');
-      if (value !== null) {
-        // We have data!!
-        console.log(value);
-        setProducts(JSON.parse(value2));
-        console.log(JSON.parse(value2));
-      }
-    } catch (error) {
+      console.log(value);
+      setProducts(JSON.parse(value2));
+      setShopid(JSON.parse(value))
+  };
+
+  const apicall = async() => {
+    
+    const value = await AsyncStorage.getItem('cusid');
+    // We have data!!
+    console.log(value)
+    console.log(Shopid)
+    
+    const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/orders/orders/';
+
+    const response = await fetch(apiUrl, { 
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          shop: Shopid,
+          customer: JSON.parse(value),
+          totalPrice: Number(totalItemCount),
+          deliveryLocation: 1,
+          deliveryNote: 'floor1'
+        }
+      )
+    })
+
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+      orpro(data.id)
+      //AsyncStorage.setItem('cusid', JSON.stringify((data.id)))
+      //navigation.navigate('Canteen')
+    } else {
       
     }
-  };
+  }
+
+  const orpro = async (orderid) => {
+
+      console.log('inorpro')
+
+      Products.map((items)=>{
+        console.log(orderid)
+        console.log(items)
+        const response = fetch(window.apiurl + 'api/orders/products/', { 
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              order: orderid,
+              product: items.product,
+              pricePerUnit: items.price,
+              quantity: items.quantity,
+              decorators: []
+            }
+          )
+        });
+    }
+  )
+  SuccessAlertHandler()
+}
   
   const CartCard = ({item, index}) => {
 
@@ -134,7 +205,7 @@ const calculateTotal = () => {
               <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 จัดส่งที่
               </Text>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>"suppose to be address of customer"</Text>
+              <Text style={{fontSize: 18, fontWeight: 'bold'}}>ECC building</Text>
             </View>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>
                 โน๊ตถึงร้านค้า
@@ -146,7 +217,7 @@ const calculateTotal = () => {
 	            placeholder="Insert your text!"
               />
             <View style={{marginHorizontal: 30, marginTop: 20}}>
-              <PrimaryButton title="ยืนยันการสั่งซื้อ" onPress={() => {console.log(Products), console.log(totalItemCount)}}/>
+              <PrimaryButton title="ยืนยันการสั่งซื้อ" onPress={() => {apicall()}}/>
             </View>
           </View>
         )}
@@ -165,7 +236,7 @@ const style = StyleSheet.create({
     height: 100,
     elevation: 15,
     borderRadius: 10,
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.white,
     marginVertical: 10,
     marginHorizontal: 20,
     paddingHorizontal: 10,

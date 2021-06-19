@@ -51,7 +51,11 @@ const ShopScreen = ({navigation}) => {
     throw new Error('Network response was not ok.')
   }
 
-  const apicall = (userid, storeid) => {
+  const apicall = async (userid, storeid) => {
+
+    const value = await AsyncStorage.getItem('cusid');
+    // We have data!!
+    console.log(value)
 
     const apiUrl = window.apiurl + 'api/shops/favouriteShop/';
     fetch(apiUrl, { 
@@ -62,7 +66,7 @@ const ShopScreen = ({navigation}) => {
       },
       body: JSON.stringify(
         {
-          customer: userid,
+          customer: JSON.parse(value),
           shop: storeid,
         }
       )
@@ -71,19 +75,15 @@ const ShopScreen = ({navigation}) => {
     .catch(error => console.log("Error detected: " + error)) 
   }
 
-  const storeshopid = (sid) => {
-    AsyncStorage.setItem('shopid', sid);
-};
 
 
 
   const Card = ({stores}) => {
-    const category = JSON.stringify(stores.category);
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => {navigation.navigate(('Menu'), {shopid: stores.id, shopname: stores.name}), storeshopid(stores.id)}}>
+        onPress={() => {navigation.navigate(('Menu'), {shopid: stores.id, shopname: stores.name}), AsyncStorage.setItem('shopid', JSON.stringify(stores.id))}}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end', top: 20, left:-20 }}>
             <Image source={{uri:stores.main_image}} style={{height: 120, width: 120, borderRadius: 15}} />
@@ -193,7 +193,7 @@ const style = StyleSheet.create({
     marginTop: 10,
     borderRadius: 15,
     elevation: 13,
-    backgroundColor: COLORS.light,
+    backgroundColor: COLORS.white,
   },
   inputContainer: {
     flex: 1,

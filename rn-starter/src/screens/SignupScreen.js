@@ -177,6 +177,18 @@ const SignupScreen = ({navigation}) => {
   const [cpassword, setCpassword] = useState("");
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
+
+  const successAlertHandler = () => {
+    //function to make simple alert
+    Alert.alert(
+      'Signup Success',
+      'Welcome to NearMe', // <- this part is optional, you can pass an empty string
+      [
+        {text: 'OK', onPress: () => navigation.navigate('Canteen')},
+      ],
+      {cancelable: false},
+    );
+  };
   
   const apicall = async() => {
 
@@ -230,7 +242,7 @@ const SignupScreen = ({navigation}) => {
     console.log(data);
     if (response.ok) {
       AsyncStorage.setItem('cusid', JSON.stringify((data.id)))
-      navigation.navigate('Canteen')
+      successAlertHandler()
     } else {
       
     }

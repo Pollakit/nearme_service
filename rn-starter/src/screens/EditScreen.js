@@ -12,24 +12,19 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 const ProfileScreen = ({ navigation }) => {
 
-  const [initialname, setinitialname] = useState(navigation.getParam('username'));
   const [fname, setFname] = useState(navigation.getParam('fname'));
   const [lname, setLname] = useState(navigation.getParam('lname'));
   const [username, setUsername] = useState(navigation.getParam('username'));
   const [phone, setPhone] = useState(navigation.getParam('phone'));
 
-  const handleResponse = res => {
-    if(res.ok) {
-      navigation.navigate('profile')
-    }
-    throw new Error('Network response was not ok.')
-  }
 
   const apicall = async() => {
 
-    const apiUrl = 'https://nearme-kmitl.herokuapp.com/api/accounts/customers/1/';
+    const value = await AsyncStorage.getItem('cusid');
+    // We have data!!
+    console.log(value);
 
-    const response = await fetch(apiUrl, { 
+    const response = await fetch('https://nearme-kmitl.herokuapp.com/api/accounts/customers/1/' + JSON.parse(value) + '/', { 
       method: 'put',
       headers: {
         'Accept': 'application/json',
@@ -80,35 +75,31 @@ const ProfileScreen = ({ navigation }) => {
         
         <View style={{marginTop: 20}}>
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>ชื่อบัญชี: <TextInput style={styles.text}
-                                                            defaultValue= {navigation.getParam('username')}
-                                                            placeholderTextColor="#003f5c"
-                                                            onChangeText={(username) => setUsername(username)}/>
-              </Text> 
+               <TextInput style={STYLES.input}
+                  defaultValue= {navigation.getParam('username')}
+                  placeholderTextColor="#003f5c"
+                  onChangeText={(username) => setUsername(username)}/>
           </View>
 
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>ชื่อจริง: <TextInput style={styles.text}
-                                                            defaultValue= {navigation.getParam('fname')}
-                                                            placeholderTextColor="#003f5c"
-                                                            onChangeText={(fname) => setFname(fname)}/></Text> 
+              <TextInput style={STYLES.input}
+                  defaultValue= {navigation.getParam('fname')}
+                  placeholderTextColor="#003f5c"
+                  onChangeText={(fname) => setFname(fname)}/>
           </View>
 
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>นามสกุล: <TextInput style={styles.text}
-                                                            defaultValue= {navigation.getParam('lname')}
-                                                            placeholderTextColor="#003f5c"
-                                                            onChangeText={(lname) => setLname(lname)}/></Text> 
+              <TextInput style={STYLES.input}
+                  defaultValue= {navigation.getParam('lname')}
+                  placeholderTextColor="#003f5c"
+                  onChangeText={(lname) => setLname(lname)}/>
           </View>
 
           <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>อีเมล:  {navigation.getParam('email')}</Text>
-          </View>
-          <View style={STYLES.inputContainer}>
-              <Text style={STYLES.input}>เบอร์โทรศัพท์: <TextInput style={styles.text}
-                                                            defaultValue= {navigation.getParam('phone')}
-                                                            placeholderTextColor="#003f5c"
-                                                            onChangeText={(phone) => setPhone(phone)}/></Text>
+              <TextInput style={STYLES.input}
+                  defaultValue= {navigation.getParam('phone')}
+                  placeholderTextColor="#003f5c"
+                  onChangeText={(phone) => setPhone(phone)}/>
           </View>
           
           <View style={{marginHorizontal: 30 , marginVertical:50}}>
