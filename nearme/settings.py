@@ -130,7 +130,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+
 # CORS_ORIGIN_WHITELIST = (
 #     'http://localhost:3000',
 #     'http://localhost:8000',
@@ -254,9 +254,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'nearme-kmitl',
-    'API_KEY': '264357333432383',
-    'API_SECRET': 'KfGrnYRZgXEBxn0MvXzrHvn5K3Q',
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('CLOUD_API_KEY'),
+    'API_SECRET': config('CLOUD_API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
